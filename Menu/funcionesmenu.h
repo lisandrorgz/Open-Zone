@@ -1,9 +1,9 @@
 #include "Greek_31_Card_Game.h"
-#include "MathBlitz 1.0.h"
+#include "Matematicas.h"
 #include "TICTAC~1.h"
 #include "Vibora.h"
-#include "funcionesJuegos.h"
-#include <stdbool.h>
+#include "funcionesmenu.h"
+
 
 bool ganarFichas();
 bool compararSaldo(int);
@@ -65,6 +65,8 @@ bool ganarFichas() {
     scanf("%d", &decision);
     return decision;
 }
+
+
 
 
 
