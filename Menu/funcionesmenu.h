@@ -2,7 +2,8 @@
 #include "Matematicas.h"
 #include "TICTAC~1.h"
 #include "Vibora.h"
-#include "funcionesmenu.h"
+
+
 
 
 bool ganarFichas();
@@ -22,7 +23,7 @@ void jugarsegunEleccion(int pEleccion, int * pSaldo) {
     switch (pEleccion)
     {
     case 1: mainmath(pSaldo); break;
-    case 2: menusnake(); break;
+    case 2: menusnake(pSaldo); break;
     case 3: menublackjack(); break;
     case 4: ganarSaldo(pSaldo); break;
     case 5: exit(0);

@@ -4,6 +4,7 @@
         "funcionesmenu.h": "c",
         "stdbool.h": "c",
         "greek_31_card_game.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "matematicas.h": "c"
     }
 }

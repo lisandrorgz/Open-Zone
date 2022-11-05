@@ -6,16 +6,18 @@
 #include <windows.h>
 #include <process.h>
 
+
+
 #define UP 72
 #define DOWN 80
 #define LEFT 75
 #define RIGHT 77
 
-//declaração variáveis
+//declaracion de variables
 int tamanho, curvan, tam, vida;
 char tecla;
 //decalaração métodos
-void cobrinha(), erro(), gravartxt(), intervalo(long double), mover(), comer(), xyz(int x, int y), curvar(), borda(), descer(), esquerda(), subir(), direita(), sair(), menusnake(), jogar(), pontuacao(), descricao(), desenvolvedor();
+void cobrinha(), erro(), intervalo(long double), mover(int*), comer(), xyz(int x, int y), curvar(), borda(), descer(), esquerda(), subir(), direita(), sair(int*), menusnake(int*), jogar(int*), pontuacao(), descricao(), desenvolvedor();
 int placar(), placarx();
 
 struct coordenada
@@ -31,14 +33,15 @@ coordenada cabeca, curva[500], comida, corpo[30];
 
 
 //método que imprime e valida as opções do menu
-void menusnake()
-{
+void menusnake(int * contador)
+{ 
+  
+  
   int opc = 0;
-
   do
   {
     cobrinha();
-    printf("\n1. Jogar \n2. Ver pontuacao \n3. Intrucoes \n4. Sobre o desenvolvedor \n5. Sair\n****************************\n");
+    printf("\n1. Jugar \n2. Ver puntuacion \n3. Salir\n****************************\n");
     scanf("%d", &opc);
 
     switch (opc)
@@ -46,7 +49,7 @@ void menusnake()
     //opcao 1
     case 1:
       system("cls");
-      jogar();
+      jogar(contador);
       break;
     //opcao 2
     case 2:
@@ -55,29 +58,22 @@ void menusnake()
       break;
     //opcao 3
     case 3:
-      system("cls");
-      descricao();
       break;
-    //opcao 4
-    case 4:
-      system("cls");
-      desenvolvedor();
-      break;
-    //opcao 5
-    case 5:
-      exit(0);
-      break;
+  
     default:
       erro();
-      printf("\nXXXXXXXXXXXXXXXXXXXXXXX Selecione de 1 a 5 XXXXXXXXXXXXXXXXXXXXXXX\n");
+      printf("\nXXXXXXXXXXXXXXXXXXXXXXX Seleccione del 1 a 5 XXXXXXXXXXXXXXXXXXXXXXX\n");
       break;
+     
     }
 
-  } while (opc != 5);
-}
+  } while (opc != 5 && *contador != 0);
+ }
+
+
 
 //método que inicia o jogo
-void jogar()
+void jogar(int * contador)
 {
   char tecla;
 
@@ -90,7 +86,7 @@ void jogar()
   comer();  //cria a primeira comida
   vida = 3; //numero de vidas
   curva[0] = cabeca;
-  mover(); //inicia o jogo
+  mover(contador); //inicia o jogo
 }
 
 //método que imprime a cobrinha em ASCII art do ficheiro de texto
@@ -124,7 +120,7 @@ void erro()
 //método que imprime pontuação salva no ficheiro de texto
 void pontuacao()
 {
-  printf("_______  Pontuacao _______\n");
+  printf("_______  Puntuacion _______\n");
   FILE *info = fopen("pontuacao.txt", "r");
   char c;
 
@@ -136,20 +132,10 @@ void pontuacao()
   fclose(info);
 }
 
-//método para imprimir instruções do jogo
-void descricao()
-{
-  printf("_______  Instrucoes _______\n-> O objetivo deste jogo, e alimentar a cobrinha o maximo possivel;\n-> Cada vez que alimentares a cobrinha, o seu tamanho aumentara;\n-> Se bater as paredes ou enrolar a cobrinha, perde uma vida;\n-> Tem direito a 3 vidas por jogo;\n-> Cada comida, vale 1 ponto;\n-> No final a sua pontuacao, ficara salva no jogo com o seu nome;\n-> Use as setas direcionais, para jogar;\n-> Pressione qualquer tecla durante o jogo, para pausar;\n-> Pressione qualquer tecla, para retomar ao jogo pausado;\n-> Use a tecla ESC para fechar o jogo;\n____________________________\n");
-}
 
-//método para imprimir dados do desenvolvedor
-void desenvolvedor()
-{
-  printf("______  Desenvolvedor  ______\nNome: Victor Tesoura Junior\nVersao: 1.0\nUniAmerica: Desafio 2 (semestre 1)\n____________________________\n");
-}
 
 //método que movimenta a cobrinha em função de coordenadas
-void mover()
+void mover(int *contador)
 {
   int a, i;
 
@@ -190,7 +176,7 @@ void mover()
       subir();
     }
 
-    sair();
+    sair(contador);
   } while (!kbhit());
 
   a = getch();
@@ -229,7 +215,7 @@ void mover()
       cabeca.x--;
     }
 
-    mover();
+    mover(contador);
   }
   else if (tecla == 27)
   {
@@ -239,7 +225,7 @@ void mover()
   else
   {
     printf("\a");
-    mover();
+    mover(contador);
   }
 }
 
@@ -298,9 +284,10 @@ void intervalo(long double k)
 }
 
 //método que verifica as vidas
-void sair()
+void sair(int * contador)
 {
   int i, verificar = 0;
+  
 
   for (i = 4; i < tamanho; i++) //inicia com 4, pois só assim é que a cobrinha poderá enrolar-se
   {
@@ -317,25 +304,35 @@ void sair()
 
   if (cabeca.x <= 10 || cabeca.x >= 70 || cabeca.y <= 10 || cabeca.y >= 30 || verificar != 0)
   {
+    
     vida--;
+    
 
-    if (vida > 0)
+    if ( vida > 0)
     {
       cabeca.x = 25;
       cabeca.y = 20;
       curvan = 0;
       cabeca.direcao = RIGHT;
-      mover();
+      mover(contador);
     }
     else
     {
       system("cls");
-      printf("Ohh perdeu!!!\nPressione qualquer tecla para voltar ao Menu\n");
-      gravartxt();
-      menusnake();
+      *contador-=1;
+      if(saldoen0(*contador)) {
+        printf("Perdiste y no tienes mas fichas!!!\n");
+        exit(0);}
+      system("cls");
+      printf("Perdiste!!!\n---\tVolviendo al Menu\t---\n");
+      
+      menusnake(contador);
+      
+    }
+      
     }
   }
-}
+
 
 //método que cria a comida
 void comer()
@@ -551,49 +548,7 @@ void borda()
   }
 }
 
-//método que grava a pontuação no ficheiro de texto
-void gravartxt()
-{
-  char nome[20], nmaiusculo[20], cha, c;
-  int i, j, px;
-  FILE *info;
 
-  info = fopen("pontuacao.txt", "a+");
-  getch();
-  system("cls");
-  printf("Digite o seu nome\n");
-  scanf("%[^\n]", nome);
-
-  for (j = 0; nome[j] != '\0'; j++)
-  {
-    //converter a primeira letra depois do espaço a maiuscula
-    nmaiusculo[0] = toupper(nome[0]);
-
-    if (nome[j - 1] == ' ')
-    {
-      nmaiusculo[j] = toupper(nome[j]);
-      nmaiusculo[j - 1] = nome[j - 1];
-    }
-    else
-    {
-      nmaiusculo[j] = nome[j];
-    }
-  }
-
-  nmaiusculo[j] = '\0';
-  //grava o nome do jogador
-  fprintf(info, "Nome: %s\n", nmaiusculo);
-  //grava a data e hora
-  time_t mytime;
-  mytime = time(NULL);
-  fprintf(info, "Data: %s", ctime(&mytime));
-  //grava os pontos do placar
-  fprintf(info, "Pontos: %d\n", px = placarx());
-  for (i = 0; i <= 50; i++)
-    fprintf(info, "%c", '_');
-  fprintf(info, "\n");
-  fclose(info);
-}
 
 //método que imprime o placar do jogo
 int placar()
