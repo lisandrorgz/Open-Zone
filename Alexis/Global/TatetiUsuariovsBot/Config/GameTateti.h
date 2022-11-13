@@ -70,11 +70,11 @@ void datosBotAdmin(int pNumElegido){
     srand(time(NULL));
     numElegidoBot = 1 + rand() % 9;
     printf("\t\t\t%s: Me Toca a mi!\n", nombrePlayer[2]);
-    Sleep(1);
+    sleep(60);
     printf("\t\t\t%s: Dejame pensar bien...\n", nombrePlayer[2]);
-    Sleep(1);
+    sleep(60);
     printf("\t\t\t%s: Listo! Tu turno...\n", nombrePlayer[2]);
-    Sleep(1);
+    sleep(1);
 }
 
 void ponerXoOUsuario(int numElegido){
