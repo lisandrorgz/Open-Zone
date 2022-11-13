@@ -4,7 +4,7 @@
 #include <time.h>
 #include <ctype.h>
 #include <windows.h>
-#include <process.h>
+#include <stdbool.h>
 
 
 
@@ -16,6 +16,7 @@
 //declaracion de variables
 int tamanho, curvan, tam, vida;
 char tecla;
+bool flag = true;
 //decalaração métodos
 void cobrinha(), erro(), intervalo(long double), mover(int*), comer(), xyz(int x, int y), curvar(), borda(), descer(), esquerda(), subir(), direita(), sair(int*), menusnake(int*), jogar(int*), pontuacao(), descricao(), desenvolvedor();
 int placar(), placarx();
@@ -37,13 +38,14 @@ void menusnake(int * contador)
 { 
   
   
-  int opc = 0;
+  int opc;
+  if (flag) {
   do
   {
     cobrinha();
     printf("\n1. Jugar \n2. Ver puntuacion \n3. Salir\n****************************\n");
     scanf("%d", &opc);
-
+    
     switch (opc)
     {
     //opcao 1
@@ -65,10 +67,14 @@ void menusnake(int * contador)
       printf("\nXXXXXXXXXXXXXXXXXXXXXXX Seleccione del 1 a 5 XXXXXXXXXXXXXXXXXXXXXXX\n");
       break;
      
-    }
-
-  } while (opc != 5 && *contador != 0);
- }
+      }
+    } while (opc != 5 && flag == true);
+    
+    } 
+  sinsaldo: 
+    printf("No hay mas fichas!\n");
+  }
+ 
 
 
 
@@ -97,8 +103,9 @@ void cobrinha()
 
   do
   {
+    
     putchar(c = getc(info));
-  } while (c != EOF);
+  } while (c != EOF && flag == true);
 
   fclose(info);
 }
@@ -111,8 +118,9 @@ void erro()
 
   do
   {
+    
     putchar(c = getc(info));
-  } while (c != EOF);
+  } while (c != EOF && flag == true);
 
   fclose(info);
 }
@@ -141,6 +149,7 @@ void mover(int *contador)
 
   do
   {
+    
     comer();
     fflush(stdin);
     tam = 0;
@@ -177,7 +186,7 @@ void mover(int *contador)
     }
 
     sair(contador);
-  } while (!kbhit());
+  } while (!kbhit() && flag == true);
 
   a = getch();
 
@@ -321,12 +330,11 @@ void sair(int * contador)
       system("cls");
       *contador-=1;
       if(saldoen0(*contador)) {
-        printf("Perdiste y no tienes mas fichas!!!\n");
-        exit(0);}
-      system("cls");
-      printf("Perdiste!!!\n---\tVolviendo al Menu\t---\n");
-      
-      menusnake(contador);
+        printf("Perdiste!\nNo tienes mas fichas!\n");
+        printf("Saliendo del sistema...");
+        sleep(1);
+        exit(0);
+        }  
       
     }
       

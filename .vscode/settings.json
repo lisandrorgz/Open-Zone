@@ -5,6 +5,8 @@
         "stdbool.h": "c",
         "greek_31_card_game.h": "c",
         "stdlib.h": "c",
-        "matematicas.h": "c"
+        "matematicas.h": "c",
+        "time.h": "c",
+        "stdio.h": "c"
     }
 }
