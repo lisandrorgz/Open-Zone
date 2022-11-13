@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef char string[100];
 
@@ -22,44 +23,48 @@ void grabarRegistroAlumno();
 void verCuentaSiNoEstaRegistrada();
 
 void abrirArchivoParaRegistar() {
-	login = fopen("cuentaUsuario.dat", "a+b");
+	login = fopen("Config/cuentaUsuario.dat", "a+b");
 }
 
 void ingresarDatos() {
-	printf("Elija un Numero de Cuenta:");
-    scanf("%d", &rDatosLogin.codCuenta);
+    rDatosLogin.codCuenta = 1;
     printf("Elija un Nombre de Usuario(Sin Espacios):");
     scanf("%s", &rDatosLogin.nombreUsuario);
     printf("Elija una contrasenia para la cuenta:");
     scanf("%s", &rDatosLogin.password);
-    //! verCuentaSiNoEstaRegistrada(rDatosLogin);
+    verCuentaSiNoEstaRegistrada();
     grabarRegistroAlumno();
 }
 
 void grabarRegistroAlumno() {
 	fwrite(&rDatosLogin, sizeof(tDatosLogin), 1, login);
+    //printf("Datos de la cuenta:\nNumero de Cuenta: %d.\nNombre de Usuario: %s\nPassword: %s\n\n", rDatosLogin.codCuenta, rDatosLogin.nombreUsuario, rDatosLogin.password);
     printf("Registrado Correctamente\n");
+    system("pause");
+    system("cls");
 }
 
 void cerrarArchivoRegistro() {
 	fclose(login);
 }
 
-void verCuentaSiNoEstaRegistrada(tDatosLogin pDatosLogin) {
+void verCuentaSiNoEstaRegistrada() {
     tDatosLogin prueba;
+    int respuesta;
+    fread(&prueba, sizeof(tDatosLogin), 1, login);
     while (!feof(login)) {
-        //fscanf(login, "%d%s%s", &prueba.codCuenta, prueba.nombreUsuario, prueba.password);
-        //fread(&rDatosLogin, sizeof(tDatosLogin), 1, login);
-        if (prueba.codCuenta == rDatosLogin.codCuenta) {
-            printf("Numero de cuenta ya existe. Elija otro por favor:\n");
-            scanf("%d", &rDatosLogin.codCuenta);
-        }
-        if (prueba.nombreUsuario == rDatosLogin.nombreUsuario) {
+        rDatosLogin.codCuenta = prueba.codCuenta+1;
+        if (!strcmp(prueba.nombreUsuario, rDatosLogin.nombreUsuario)) {
+            printf("Usuario ya registrado...\n");
             printf("Nombre de usuario ya existe. Elija otro por favor:\n");
             scanf("%s", &rDatosLogin.nombreUsuario);
+            printf("Desea cambiar la contrase%ca? -> %s (1-Si) - (0-No):", 164, rDatosLogin.password);
+            scanf("%d", &respuesta);
+            if (respuesta == 1) {
+                printf("Ingrese la nueva contrase%ca:\n", 164);
+                scanf("%s", &rDatosLogin.password);
+            }
         }
-        if (prueba.codCuenta == rDatosLogin.codCuenta && prueba.nombreUsuario == rDatosLogin.nombreUsuario && prueba.password == rDatosLogin.password) {
-            printf("Usuario ya registrado...\n");
-        }
+        fread(&prueba, sizeof(tDatosLogin), 1, login);
     }
 }

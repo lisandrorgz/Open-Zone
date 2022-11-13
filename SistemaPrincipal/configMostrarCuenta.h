@@ -22,8 +22,12 @@ void cerrarArchivoMostrar();
 
 void abrirArchivoParaMostrar(){
 	system("cls");
+<<<<<<<< HEAD:Alexis/Global/SistemaLogin/Config/configMostrarCuenta.h
+	mostrarLogin = fopen("Config/cuentaUsuario.dat", "rb");
+========
 	mostrarLogin = fopen("cuentaUsuario.dat", "rb");
-	printf("\t*** REGISTRO DE ALUMNO FACENA***\n" ); 
+>>>>>>>> 46b62373da49d8e065ecb194c65410f317e96e0c:SistemaPrincipal/configMostrarCuenta.h
+	printf("\t*** REGISTRO DE USUARIOS ***\n" ); 
 	printf("Cuenta | Usuario\t| Password\n"); 
 }
 
