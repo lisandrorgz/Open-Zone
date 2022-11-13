@@ -3,6 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
+#include <windows.h>
 
 typedef char string[100];
 
@@ -13,7 +14,7 @@ void pedirDatosPlayer();
 void datosBotAdmin();
 void ponerXoOUsuario(int);
 void ponerXoOBot(int);
-int checarSiGanoAlguien();
+int checarSiGano();
 void mostrarTateti();
 
 int player = 2;
@@ -39,22 +40,25 @@ void programaTateti(){
     marcar = (player == 1) ? 'X' : 'O';
     pedirDatosPlayer();
     ponerXoOUsuario(numElegidoPlayer);
-    player++;
-    marcar = (player == 2) ? 'O' : 'X';
-    datosBotAdmin(numElegidoPlayer);
-    ponerXoOBot(numElegidoBot);
-    verSiGanoAlguien = checarSiGanoAlguien();
+    verSiGanoAlguien = checarSiGano();
+        if (verSiGanoAlguien != 1) {
+            player++;
+            marcar = (player == 2) ? 'O' : 'X';
+            datosBotAdmin(numElegidoPlayer);
+            ponerXoOBot(numElegidoBot);
+            verSiGanoAlguien = checarSiGano();
+        }
     } while(verSiGanoAlguien == -1);
     mostrarTateti();
     if (verSiGanoAlguien == 1) {
-        int ganadorPlayer = --player;
-        if (ganadorPlayer == 1) {
-            printf("Ganaste %s!!, 5 Puntos\n", nombrePlayer[ganadorPlayer]);
+        if (player == 1) {
+            printf("\033[0;33mGanaste 5 Puntos %s!!\033[0m\n", nombrePlayer[player]);
+            //? y si quiere volver a jugar es llamar a la funcion programaTateti y añadir un parametro para recibir nombre
             //TODO: Aca va los puntos porque gano el usuario...
         }
-        else printf("Gano %s.\n", nombrePlayer[2]);
+        else printf("Gano %s.\n", nombrePlayer[player]);
     }
-    else if (verSiGanoAlguien == 0)printf("\t\t\t==>\aGame Over");
+    if (verSiGanoAlguien == 0) printf("\t\t\t==>\aGame Over");
 }
 
 void pedirDatosPlayer(){
@@ -66,11 +70,11 @@ void datosBotAdmin(int pNumElegido){
     srand(time(NULL));
     numElegidoBot = 1 + rand() % 9;
     printf("\t\t\t%s: Me Toca a mi!\n", nombrePlayer[2]);
-    sleep(1);
+    Sleep(1);
     printf("\t\t\t%s: Dejame pensar bien...\n", nombrePlayer[2]);
-    sleep(1);
+    Sleep(1);
     printf("\t\t\t%s: Listo! Tu turno...\n", nombrePlayer[2]);
-    sleep(1);
+    Sleep(1);
 }
 
 void ponerXoOUsuario(int numElegido){
@@ -84,7 +88,7 @@ void ponerXoOUsuario(int numElegido){
 	else if (numElegido == 8 && solucion[8] == '8') solucion[8] = marcar;
 	else if (numElegido == 9 && solucion[9] == '9') solucion[9] = marcar;
 	else{
-	    printf("\t\t\tError opcion ya seleccionada\n");
+	    printf("\t\t\t\t\033[0;31m[!]Error[!]\033[0m\n");
         printf("\t\t\t%s, ingrese otro numero: ", nombrePlayer[1]);
 	    scanf("%d", &numElegidoPlayer);
         ponerXoOUsuario(numElegidoPlayer);
@@ -107,7 +111,7 @@ void ponerXoOBot(int numElegido){
 	}
 }
 
-int checarSiGanoAlguien(){
+int checarSiGano(){
     if (solucion[1] == solucion[2] && solucion[2] == solucion[3]) return 1;
     else if (solucion[4] == solucion[5] && solucion[5] == solucion[6]) return 1;
     else if (solucion[7] == solucion[8] && solucion[8] == solucion[9]) return 1;
@@ -117,7 +121,7 @@ int checarSiGanoAlguien(){
     else if (solucion[1] == solucion[5] && solucion[5] == solucion[9]) return 1;
     else if (solucion[3] == solucion[5] && solucion[5] == solucion[7]) return 1;
     else if (solucion[1] != '1' && solucion[2] != '2' && solucion[3] != '3' && solucion[4] != '4' && solucion[5] != '5' && solucion[6] != '6' && solucion[7] != '7' && solucion[8] != '8' && solucion[9] != '9') return 0;
-    else return - 1;
+    else return -1;
 }
 
 void mostrarTateti(){
