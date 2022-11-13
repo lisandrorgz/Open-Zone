@@ -1,5 +1,5 @@
-#include "configLoginCuenta.h"
-#include "configMostrarCuenta.h"
+#include "Config/configLoginCuenta.h"
+#include "Config/configMostrarCuenta.h"
 
 void menu();
 
@@ -15,11 +15,13 @@ void menu() {
         scanf("%d", &respuesta);
         switch (respuesta) {
         case 1:
+        //* funciones para registrar una cuenta...
             abrirArchivoParaRegistar();
 	        ingresarDatos();
 	        cerrarArchivoRegistro();
             break;
         case 2:
+        //* funciones para mostrar cuentas registradas...
             abrirArchivoParaMostrar();
 	        procesarCuentasUsuarios();
 	        cerrarArchivoMostrar();

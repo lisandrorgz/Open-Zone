@@ -22,8 +22,8 @@ void cerrarArchivoMostrar();
 
 void abrirArchivoParaMostrar(){
 	system("cls");
-	mostrarLogin = fopen("cuentaUsuario.dat", "rb");
-	printf("\t*** REGISTRO DE ALUMNO FACENA***\n" ); 
+	mostrarLogin = fopen("Config/cuentaUsuario.dat", "rb");
+	printf("\t*** REGISTRO DE USUARIOS ***\n" ); 
 	printf("Cuenta | Usuario\t| Password\n"); 
 }
 
