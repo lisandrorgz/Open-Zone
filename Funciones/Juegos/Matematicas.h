@@ -3,8 +3,19 @@
 #include<stdlib.h>
 #include "funcionesJuegos.h"
 
+int ingreso=1;
+
+
+void volverAlMenu();
+
+void volverAlMenu() {
+    printf("Seguir jugando? 1/0: ");
+    scanf("%d", &ingreso);
+}
 void menumath()
 {
+    
+    system("cls");
     printf("1. Nivel 1 (Rangos entre: 1~10)\n");
     printf("2. Nivel 2 (Rangos entre: 1~20)\n");
     printf("3. Nivel 3 (Rangos entre: 1~50)\n");
@@ -19,7 +30,7 @@ void l1(int * contador)
     time_t t;
     srand((unsigned) time(&t));
     printf("Nivel 1 seleccionado\n(Para seleccionar otro nivel, reinicie el programa)\n");
-    while(1) 
+    while(ingreso == 1) 
     {
         z=rand()%5+1;
         a=rand()%9+1;
@@ -45,6 +56,7 @@ void l1(int * contador)
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
                 } 
                 printf("Te quedan %d fichas!!\n", *contador);
                     
@@ -65,6 +77,7 @@ void l1(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             } printf("Te quedan %d fichas!!\n", *contador);
         }
         else if(z==3)
@@ -81,6 +94,7 @@ void l1(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             } printf("Te quedan %d fichas!!\n", *contador);
         }
         else if(z==4)
@@ -102,6 +116,7 @@ void l1(int * contador)
                 *contador -=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -114,7 +129,7 @@ void l2(int * contador)
     time_t t;
     srand((unsigned) time(&t));
     printf("Nivel 2 seleccionado\n(Para seleccionar otro nivel, reinicie el programa)\n");
-    while(1)
+    while(ingreso == 1)
     {
         z=rand()%5+1;
         a=rand()%19+1;
@@ -139,6 +154,7 @@ void l2(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
 
@@ -157,6 +173,7 @@ void l2(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -174,6 +191,7 @@ void l2(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -196,6 +214,7 @@ void l2(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -208,7 +227,7 @@ void l3(int * contador)
     time_t t;
     srand((unsigned) time(&t));
     printf("Nivel 3 seleccionado\n(Para seleccionar otro nivel, reinicie el programa\n");
-    while(1)
+    while(ingreso == 1)
     {
         z=rand()%5+1;
         a=rand()%49+1;
@@ -233,6 +252,7 @@ void l3(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -250,6 +270,7 @@ void l3(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -267,6 +288,7 @@ void l3(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -289,6 +311,7 @@ void l3(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -301,7 +324,7 @@ void l4(int * contador)
     time_t t;
     srand((unsigned) time(&t));
     printf("Nivel 4 seleccionado\n(Para seleccionar otro nivel, reinicie el programa)\n");
-    while(1)
+    while(ingreso == 1)
     {
         z=rand()%5+1;
         a=rand()%99+1;
@@ -326,6 +349,7 @@ void l4(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -343,6 +367,7 @@ void l4(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -360,6 +385,7 @@ void l4(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -382,6 +408,7 @@ void l4(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -394,7 +421,7 @@ void l5(int * contador)
     time_t t;
     srand((unsigned) time(&t));
     printf("Nivel 5 seleccionado\n(Para seleccionar otro nivel, reinicie el programa)\n");
-    while(1)
+    while(ingreso==1)
     {
         z=rand()%5+1;
         a=rand()%199+1;
@@ -419,6 +446,7 @@ void l5(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -436,6 +464,7 @@ void l5(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -453,6 +482,7 @@ void l5(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }
@@ -475,6 +505,7 @@ void l5(int * contador)
                 *contador-=1;
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(*contador)) break;
+                else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", *contador);
         }

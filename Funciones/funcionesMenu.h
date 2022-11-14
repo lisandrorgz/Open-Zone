@@ -1,6 +1,6 @@
 
 #include "Juegos/Matematicas.h"
-#include "Juegos/Vibora.h"
+#include "Juegos/Ahorcado.h"
 #include "Juegos/TaTeTi.h"
 #include "Juegos/BlackJack.h"
 
@@ -13,7 +13,7 @@ void imprimirTitulos() {
     printf("Elija un juego\n");
     printf("1. Matematicas\n");
     printf("2. BlackJack\n");
-    printf("3. Vibora\n");
+    printf("3. Ahorcado\n");
     printf("4- TaTeTi vs Bot | Ganar Saldo\n");
     printf("5- Salir\n>>> ");
 
@@ -24,7 +24,7 @@ void jugarsegunEleccion(int pEleccion, int * pSaldo) {
     {
     case 1: mainmath(pSaldo); break;
     case 2: menublackjack(pSaldo);break;
-    case 3: menusnake(pSaldo);break;
+    case 3: menuahorcado(pSaldo);break;
     case 4: ganarSaldo(pSaldo); break;
     case 5: exit(0);
     default: printf("Valor ingresado erroneo!"); break;
@@ -42,7 +42,7 @@ void menudeJuegos() {
         scanf("%d", &ingreso);
         jugarsegunEleccion(ingreso, &contador);
         if (saldoen0(contador)){
-            saldo0 : ;
+            system("cls");
             printf("<---\tNo tienes mas fichas\t--->\n");
             if (ganarFichas()) ganarSaldo(&contador);
             else continue;
