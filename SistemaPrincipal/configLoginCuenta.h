@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "menuJuegos.h" //* Configuracion del Menu Juegos...
 
 typedef char string[100];
 
@@ -29,11 +30,13 @@ void abrirArchivoParaLogearse() {
 }
 
 void pedirDatosUsuarioPassword() {
+    abrirArchivoParaLogearse();
     printf("\t\t\t\tUsuario: ");
     scanf("%s", &usuario.nombreUsuario);
-    printf("\t\t\t\tContrase%ca:", 164);
+    printf("\t\t\t\tContrase%ca: ", 164);
     scanf("%s", &usuario.password);
     escanearArchivoParaLogearse(usuario);
+    cerrarArchivoParaLogearse();
 }
 
 void escanearArchivoParaLogearse() {
@@ -46,12 +49,11 @@ void escanearArchivoParaLogearse() {
         else fread(&pDatosUsuario, sizeof(tDatosUsuarios), 1, login);
     }
     if (!strcmp(pDatosUsuario.nombreUsuario, usuario.nombreUsuario) && !strcmp(pDatosUsuario.password, usuario.password)){
-        //* Menu de juegos...
-        
+        system("cls");
+        menuJuegos(pDatosUsuario.nombreUsuario, pDatosUsuario.puntos);
     }
     else {
         cerrarArchivoParaLogearse();
-        abrirArchivoParaLogearse();
         system("cls");
         printf("\t\t\t\tUsuario o contrase%ca incorrecto\n", 164);
         printf("\t\t\t\tIntentelo de nuevo:\n");

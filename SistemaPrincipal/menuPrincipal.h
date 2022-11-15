@@ -25,16 +25,12 @@ void menuSwitch() {
     case 1:
         system("cls");
         printf("\t\t\t\t\tIngrese:\n");
-        abrirArchivoParaLogearse();
         pedirDatosUsuarioPassword();
-        cerrarArchivoParaLogearse();
         menuPrincipal();
         break;
     case 2:
         system("cls");
-        abrirArchivoParaRegistar();
-	    ingresarDatos();
-	    cerrarArchivoRegistro();
+	    ingresarDatosRegistro();
         menuPrincipal();
         break;
     case 3:

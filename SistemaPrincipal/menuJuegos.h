@@ -4,6 +4,7 @@
 #include "Juegos/BlackJack.h"
 #include <windows.h>
 #include <string.h>
+#include "configMostrarCuenta.h"
 
 typedef char string[100];
 
@@ -25,6 +26,9 @@ void menuJuegos(string usuarioLogeado, int pPuntosUsuario) {
         printf("\t\t---------------------------------------------------------------------\n");
         printf("\t\t\t\t\t\t-*- Juegos -*-\n");
         printf("\t\t---------------------------------------------------------------------\n");
+        if (!strcmp(usuarioLogeado, "admin")) {
+            printf("\t\t\t\t0. Mostrar cuentas usuarios\n");
+        }
         printf("\t\t\t\t1. Matematicas\n");
         printf("\t\t\t\t2. BlackJack\n");
         printf("\t\t\t\t3. Vibora\n");
@@ -41,9 +45,10 @@ void menuJuegos(string usuarioLogeado, int pPuntosUsuario) {
 
 void menuSwitchJuegos(int pEleccion, int pPuntosUsuario) {
     switch (pEleccion) {
+    case 0: procesarCuentasUsuarios(); system("pause"); system("cls"); break;
     case 1: mainmath(pPuntosUsuario); break;
-    case 2: menublackjack(pPuntosUsuario);break;
-    case 3: menusnake(pPuntosUsuario);break;
+    case 2: menublackjack(&pPuntosUsuario);break;
+    case 3: menusnake(&pPuntosUsuario);break;
     case 4: ganarSaldo(usuarioActual, pPuntosUsuario); break;
     case 5: exit(0);
     default:
