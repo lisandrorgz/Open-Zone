@@ -11,10 +11,10 @@ typedef struct {
     string password;
     int puntos; //? "Puntos" "Saldo" "Score" "Fichas"
     //? Preguntar a Lisandro
-}tDatosUsuarios;
+}sDatosUsuarios;
 
-tDatosUsuarios pDatosUsuario;
-tDatosUsuarios usuario;
+sDatosUsuarios pDatosUsuario;
+sDatosUsuarios usuario;
 FILE *login;
 
 void abrirArchivoParaLogearse();
@@ -40,19 +40,18 @@ void pedirDatosUsuarioPassword() {
 }
 
 void escanearArchivoParaLogearse() {
-    fread(&pDatosUsuario, sizeof(tDatosUsuarios), 1, login);
+    fread(&pDatosUsuario, sizeof(sDatosUsuarios), 1, login);
     while (!feof(login)) {
         if (!strcmp(pDatosUsuario.nombreUsuario, usuario.nombreUsuario) && !strcmp(pDatosUsuario.password, usuario.password)) {
             printf("\t\t\t\tLogeado Correctamente!\n");
+            system("pause");
+            system("cls");
+            menuJuegos(pDatosUsuario.codCuenta, pDatosUsuario.nombreUsuario, pDatosUsuario.password, pDatosUsuario.puntos);
             break;
         }
-        else fread(&pDatosUsuario, sizeof(tDatosUsuarios), 1, login);
+        else fread(&pDatosUsuario, sizeof(sDatosUsuarios), 1, login);
     }
-    if (!strcmp(pDatosUsuario.nombreUsuario, usuario.nombreUsuario) && !strcmp(pDatosUsuario.password, usuario.password)){
-        system("cls");
-        menuJuegos(pDatosUsuario.nombreUsuario, pDatosUsuario.puntos);
-    }
-    else {
+    if (feof(login)) {
         cerrarArchivoParaLogearse();
         system("cls");
         printf("\t\t\t\tUsuario o contrase%ca incorrecto\n", 164);
