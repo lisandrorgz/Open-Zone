@@ -27,38 +27,62 @@ int numElegidoPlayer;
 int numElegidoBot;
 //# Datos del Tateti
 char marcar;
-
-void programaTateti(){
+int ingreso;
+void programaTateti(int*pSaldo){
     printf("Contra quien tengo que jugar?: ");
     scanf("%s", &nombrePlayer[1]);
     //? strcpy(nombrePlayer[1], "Nombre del Usuario Aca del Login (Mauri)");
     strcpy(nombrePlayer[2], "Bot - Administrador");
     system("cls");
-    do{
-    mostrarTateti();
-    player--;
-    marcar = (player == 1) ? 'X' : 'O';
-    pedirDatosPlayer();
-    ponerXoOUsuario(numElegidoPlayer);
-    verSiGanoAlguien = checarSiGano();
-        if (verSiGanoAlguien != 1) {
-            player++;
-            marcar = (player == 2) ? 'O' : 'X';
-            datosBotAdmin(numElegidoPlayer);
-            ponerXoOBot(numElegidoBot);
-            verSiGanoAlguien = checarSiGano();
+        do{
+        mostrarTateti();
+        player--;
+        marcar = (player == 1) ? 'X' : 'O';
+        pedirDatosPlayer();
+        ponerXoOUsuario(numElegidoPlayer);
+        verSiGanoAlguien = checarSiGano();
+            if (verSiGanoAlguien != 1) {
+                player++;
+                marcar = (player == 2) ? 'O' : 'X';
+                datosBotAdmin(numElegidoPlayer);
+                ponerXoOBot(numElegidoBot);
+                verSiGanoAlguien = checarSiGano();
+            }
+        } while(verSiGanoAlguien == -1);
+        mostrarTateti();
+        if (verSiGanoAlguien == 1) {
+            if (player == 1) {
+                printf("\033[0;33mGanaste 5 Puntos %s!!\033[0m\n", nombrePlayer[1]);
+                sleep(2);
+                *pSaldo+=1;
+            }
+            else {
+                printf("Gano %s.\n", nombrePlayer[player]);
+                *pSaldo-=1;
+            }
+            reiniciarJuego();
         }
-    } while(verSiGanoAlguien == -1);
-    mostrarTateti();
-    if (verSiGanoAlguien == 1) {
-        if (player == 1) {
-            printf("\033[0;33mGanaste 5 Puntos %s!!\033[0m\n", nombrePlayer[player]);
-            //? y si quiere volver a jugar es llamar a la funcion programaTateti y añadir un parametro para recibir nombre
-            //TODO: Aca va los puntos porque gano el usuario...
-        }
-        else printf("Gano %s.\n", nombrePlayer[player]);
+        if (verSiGanoAlguien == 0){
+            printf("\t\t\t==>\aGame Over | Empate!");
+            reiniciarJuego();
+        } 
+    if(!(saldoen0(*pSaldo))) printf("Seguir jugando? 1/0: "); scanf("%d", &ingreso);
+  } while(ingreso && *pSaldo!=0);
+}
+
+char enteroACaracter(int numero){
+    return numero + '0';
+}
+
+void reiniciarJuego(){
+    int i;
+    char aux;
+    for (i=1; i<10; i++) {
+        aux = enteroACaracter(i);
+        solucion[i] = aux;
     }
-    if (verSiGanoAlguien == 0) printf("\t\t\t==>\aGame Over");
+    player = 2;
+
 }
 
 void pedirDatosPlayer(){
@@ -88,7 +112,8 @@ void ponerXoOUsuario(int numElegido){
 	else if (numElegido == 8 && solucion[8] == '8') solucion[8] = marcar;
 	else if (numElegido == 9 && solucion[9] == '9') solucion[9] = marcar;
 	else{
-	    printf("\t\t\t\t\033[0;31m[X]Error[X]\033[0m\n");
+
+	    printf("\t\t\t\t\033[0;31m[!]Error[!]\033[0m\n");
         printf("\t\t\t%s, ingrese otro numero: ", nombrePlayer[1]);
 	    scanf("%d", &numElegidoPlayer);
         ponerXoOUsuario(numElegidoPlayer);

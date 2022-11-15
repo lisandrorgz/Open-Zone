@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "mathblitz 1.0.h": "c",
+        "funcionesmenu.h": "c",
+        "stdbool.h": "c",
+        "greek_31_card_game.h": "c",
+        "stdlib.h": "c",
+        "matematicas.h": "c",
+        "time.h": "c",
+        "stdio.h": "c"
+    }
+}
