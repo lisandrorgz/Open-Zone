@@ -9,8 +9,8 @@ typedef struct {
     int codCuenta;
     string nombreUsuario;
     string password;
-    int puntos; //? "Puntos" "Saldo" "Score" "Fichas"
-    //? Preguntar a Lisandro
+    int saldo, puntos; 
+    
 }tDatosRegistro;
 
 tDatosRegistro rDatosRegistro;
@@ -35,7 +35,8 @@ void ingresarDatosRegistro() {
     scanf("%s", &rDatosRegistro.nombreUsuario);
     printf("\t\t\t\tElija una contrase%ca para la cuenta: ", 164);
     scanf("%s", &rDatosRegistro.password);
-    rDatosRegistro.puntos = 5; //* Aca van cuantos puntos va a tener despues de registrarse cambiar *//
+    rDatosRegistro.puntos = 0;
+    rDatosRegistro.saldo = 1; //* Aca van cuantos puntos va a tener despues de registrarse cambiar *//
     verCuentaSiNoEstaRegistrada();
     grabarRegistroAlumno();
     cerrarArchivoRegistro();

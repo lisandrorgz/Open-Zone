@@ -1,60 +1,75 @@
-#include <stdio.h>
-#include <windows.h>
-#include <string.h>
-#include <stdbool.h>
 #include "configMostrarCuenta.h"
+#include "Cyber-Games/Juegos/TaTeTi.h"
+#include "Cyber-Games/Juegos/Ahorcado.h"
+#include "Cyber-Games/Juegos/BlackJack.h"
+#include "Cyber-Games/Juegos/Matematicas.h"
 
-typedef char string[100];
+bool ganarFichas();
+void menuJuegos(tDatosUsuario*);
+void menuSwitchJuegos(int, tDatosUsuario*);
 
-typedef struct {
-    int codCuenta;
-    string nombreUsuario;
-    string password;
-    int puntos;
-}tDatosUsuarios;
-
-tDatosUsuarios pUsuarioLogeado;
-
-void menuJuegos(int, string, string, int);
-void menuSwitchJuegos(int, tDatosUsuarios);
-
-void menuJuegos(int codCuenta, string nombreUsuario, string password, int puntos) {
-    pUsuarioLogeado.codCuenta = codCuenta;
-    strcpy(pUsuarioLogeado.nombreUsuario, nombreUsuario);
-    strcpy(pUsuarioLogeado.password, password);
-    pUsuarioLogeado.puntos = puntos;
-    int respuesta = 0;
+void menuJuegos(tDatosUsuario*Userlogeado) {
+    int respuesta;
+    do {
     printf("\t\t---------------------------------------------------------------------\n");
     printf("\t\t\t\t\t\t-*- Juegos -*-\n");
-    printf("\t\t\t\t\t<---\tTienes %d fichas\t--->\n", pUsuarioLogeado.puntos);
+    printf("\t\t\t\t\t<---\t%s Tienes %d fichas\t--->\n", Userlogeado->nombreUsuario,Userlogeado->saldo);
     printf("\t\t---------------------------------------------------------------------\n");
-    printf("\t\t\t\t1. Matematicas\n");
-    printf("\t\t\t\t2. BlackJack\n");
-    printf("\t\t\t\t3. Vibora\n");
-    printf("\t\t\t\t4- TaTeTi vs Bot\n");
-    printf("\t\t\t\t5- Salir\n");
-    if (!strcmp(pUsuarioLogeado.nombreUsuario, "admin")) {
+    imprimirTitulos();
+    if (!strcmp(Userlogeado->nombreUsuario, "admin")) {
         printf("\t\t\t\t6. Mostrar cuentas registradas de usuarios\n");
         //* Aca van las cosas que puede hacer el admin...
     }
     printf("\t\t\t\t>>> ");
     scanf("%d", &respuesta);
-    menuSwitchJuegos(respuesta, pUsuarioLogeado);
+    menuSwitchJuegos(respuesta,Userlogeado);
+    if (saldoen0(Userlogeado->saldo)){
+            system("cls");
+            printf("<---\tNo tienes mas fichas\t--->\n");
+            if (ganarFichas()) ganarSaldo(Userlogeado);
+            else continue;
+        }
+     } while (Userlogeado->saldo > 0);
 }
 
-void menuSwitchJuegos(int pEleccion, tDatosUsuarios pUsuarioLogeado) {
+void menuSwitchJuegos(int pEleccion, tDatosUsuario * Userlogeado) {
     switch (pEleccion) {
-        //* Los juegos reciben como parametro el struct de datos del usuarioLogeado...
-    case 1: printf("\t\t\t\tAca Va el juego de Matematicas\n");/* ? Menu del juego */ break;
-    case 2: printf("\t\t\t\tAca Va el juego de BlackJack\n");/* ? Menu del juego */ break;
-    case 3: printf("\t\t\t\tAca Va el juego de Vivora\n");/* ? Menu del juego */ break;
-    case 4: printf("\t\t\t\tAca Va el juego de Tateti\n");/* ? Menu del juego */ break;
+        
+    case 1: mainmath(Userlogeado);break;
+    case 2: menublackjack(Userlogeado); break;
+    case 3: menuahorcado(Userlogeado);break;
+    case 4: ganarSaldo(Userlogeado);break;
     case 5: exit(0);
     case 6: procesarCuentasUsuarios(); system("pause"); system("cls"); break;
     default:
         system("cls");
         printf("\t\t\t\t\t\033[0;31m[X]Error opcion incorrecta[X]\033[0m\n");
-        menuJuegos(pUsuarioLogeado.codCuenta, pUsuarioLogeado.nombreUsuario, pUsuarioLogeado.password, pUsuarioLogeado.puntos);
         break;
     }
+}
+
+void imprimirTitulos() {
+    printf("\t\t\t\t1. Matematicas\n");
+    printf("\t\t\t\t2. BlackJack\n");
+    printf("\t\t\t\t3. Ahorcado\n");
+    printf("\t\t\t\t4- TaTeTi vs Bot\n");
+    printf("\t\t\t\t5- Salir\n");
+
+}
+
+bool compararSaldo(int saldo) {
+    return saldo > 0;
+}
+
+void ganarSaldo(tDatosUsuario * Userlogeado) {
+    programaTateti(Userlogeado);
+}
+
+bool ganarFichas() {
+    bool aux;
+    int decision;
+    printf("Para seguir jugando, tendras que ganar fichas contra el bot\nTambien puedes terminar tu turno\nChoose:\n(1) Jugar vs el bot\n(0) Terminar el turno\n>>> ");
+    scanf("%d", &decision);
+    aux = decision;
+    return aux;
 }
