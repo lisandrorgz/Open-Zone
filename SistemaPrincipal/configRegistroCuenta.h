@@ -71,15 +71,10 @@ void verCuentaSiNoEstaRegistrada() {
     while (!feof(registro)) {
         rDatosRegistro.codCuenta = prueba.codCuenta+1;
         if (!strcmp(prueba.nombreUsuario, rDatosRegistro.nombreUsuario)) {
-            printf("Usuario ya registrado...\n");
-            printf("Nombre de usuario ya existe. Elija otro por favor:\n");
-            scanf("%s", &rDatosRegistro.nombreUsuario);
-            printf("Desea cambiar la contrase%ca? -> %s (1-Si) - (0-No):", 164, rDatosRegistro.password);
-            scanf("%d", &respuesta);
-            if (respuesta == 1) {
-                printf("Ingrese la nueva contrase%ca:\n", 164);
-                scanf("%s", &rDatosRegistro.password);
-            }
+            printf("\t\t\t\tUsuario ya registrado...\n");
+            printf("\t\t\t\tVuelva a intentarlo...\n");
+            cerrarArchivoRegistro();
+            ingresarDatosRegistro();
         }
         fread(&prueba, sizeof(tDatosRegistro), 1, registro);
     }

@@ -7,12 +7,13 @@ typedef struct {
     int codCuenta;
     string nombreUsuario;
     string password;
+    int fichas;
     int puntos;
 }regDatosUsuario;
 
 void abrirArchivo();
-void incrementarPuntos(regDatosUsuario);
-void decrementarPuntos(regDatosUsuario);
+void incrementarFichas(regDatosUsuario);
+void decrementarFichas(regDatosUsuario);
 void cerrarArchivo();
 
 FILE *modificarPuntos;
@@ -21,14 +22,14 @@ void abrirArchivo() {
     modificarPuntos = fopen("cuentasUsuario.dat","r+b");
 }
 
-void incrementarPuntos(regDatosUsuario pDatosUsuario) {
+void incrementarFichas(regDatosUsuario pDatosUsuario) {
     abrirArchivo();
     regDatosUsuario usuarioLogeado;
     fread(&usuarioLogeado, sizeof(regDatosUsuario), 1, modificarPuntos);
     while (!feof(modificarPuntos)) {
         if (!strcmp(usuarioLogeado.nombreUsuario, pDatosUsuario.nombreUsuario)) {
-            if (pDatosUsuario.puntos >= 0) {
-                pDatosUsuario.puntos += 1;
+            if (pDatosUsuario.fichas >= 0) {
+                pDatosUsuario.fichas += 1;
                 int pos = ftell(modificarPuntos)-sizeof(regDatosUsuario);
                 fseek(modificarPuntos, pos, SEEK_SET);
                 fwrite(&pDatosUsuario, sizeof(regDatosUsuario), 1, modificarPuntos);
@@ -40,14 +41,33 @@ void incrementarPuntos(regDatosUsuario pDatosUsuario) {
     cerrarArchivo();
 }
 
-void decrementarPuntos(regDatosUsuario pDatosUsuario) {
+void decrementarFichas(regDatosUsuario pDatosUsuario) {
     abrirArchivo();
     regDatosUsuario usuarioLogeado;
     fread(&usuarioLogeado, sizeof(regDatosUsuario), 1, modificarPuntos);
     while (!feof(modificarPuntos)) {
         if (!strcmp(usuarioLogeado.nombreUsuario, pDatosUsuario.nombreUsuario)) {
-            if (pDatosUsuario.puntos >= 0) {
-                pDatosUsuario.puntos -= 1;
+            if (pDatosUsuario.fichas < 0) {
+                pDatosUsuario.fichas -= 1;
+                int pos = ftell(modificarPuntos)-sizeof(regDatosUsuario);
+                fseek(modificarPuntos, pos, SEEK_SET);
+                fwrite(&pDatosUsuario, sizeof(regDatosUsuario), 1, modificarPuntos);
+                break;
+            }
+        }
+        fread(&usuarioLogeado, sizeof(regDatosUsuario), 1, modificarPuntos);
+    }
+    cerrarArchivo();
+}
+
+void incrementarPuntos(regDatosUsuario pDatosUsuario, int puntosAcumulado) {
+    abrirArchivo();
+    regDatosUsuario usuarioLogeado;
+    fread(&usuarioLogeado, sizeof(regDatosUsuario), 1, modificarPuntos);
+    while (!feof(modificarPuntos)) {
+        if (!strcmp(usuarioLogeado.nombreUsuario, pDatosUsuario.nombreUsuario)) {
+            if (pDatosUsuario.fichas >= 0) {
+                pDatosUsuario.puntos += puntosAcumulado;
                 int pos = ftell(modificarPuntos)-sizeof(regDatosUsuario);
                 fseek(modificarPuntos, pos, SEEK_SET);
                 fwrite(&pDatosUsuario, sizeof(regDatosUsuario), 1, modificarPuntos);
