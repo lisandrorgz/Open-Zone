@@ -26,7 +26,7 @@ void ingresarDatosRegistro() {
     printf("\t\t\t\tElija una contrase%ca para la cuenta: ", 164);
     scanf("%s", &rDatosRegistro.password);
     rDatosRegistro.puntos = 0;
-    rDatosRegistro.saldo = 0;
+    rDatosRegistro.saldo = 1;
     strcpy(rDatosRegistro.conexion, "Hoy");
     verCuentaSiNoEstaRegistrada();
     grabarRegistroAlumno();
@@ -44,7 +44,8 @@ void grabarRegistroAlumno() {
         system("cls");
     }
     else if (respuesta == 2) {
-        //* tiene que ir al menu principal pero nose como ir...
+        cerrarArchivoRegistro();
+        system("cls");
     }
     else {
         printf("\t\t\t\t\033[0;31m[X]Error opcion incorrecta[X]\033[0m\n");
@@ -65,6 +66,7 @@ void verCuentaSiNoEstaRegistrada() {
         if (!strcmp(aux.nombreUsuario, rDatosRegistro.nombreUsuario)) {
             printf("\t\t\t\tUsuario ya registrado...\n");
             printf("\t\t\t\tVuelva a intentarlo...\n");
+            system("cls");
             cerrarArchivoRegistro();
             ingresarDatosRegistro();
         }

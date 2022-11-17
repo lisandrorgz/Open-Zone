@@ -41,7 +41,7 @@ void menuSwitchJuegos(int pEleccion, tDatosUsuario *Userlogeado) {
     case 2: menublackjack(Userlogeado); break;
     case 3: menuahorcado(Userlogeado);break;
     case 4: ganarSaldo(Userlogeado);break;
-    case 5: printf("Saliendo..."); system("pause"); system("cls"); flag=false; break;
+    case 5: printf("\t\t\t\tSaliendo...\n"); system("pause"); system("cls"); flag=false; break;
     case 6: procesarCuentasUsuarios(); system("pause"); system("cls"); break;
     default:
         system("cls");

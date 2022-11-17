@@ -27,7 +27,7 @@ void pedirDatosUsuarioPassword() {
     scanf("%s", &user.nombreUsuario);
     printf("\t\t\t\tContrase%ca: ", 164);
     scanf("%s", &user.password);
-    escanearArchivoParaLogearse(usuario);
+    escanearArchivoParaLogearse();
     cerrarArchivoParaLogearse();
 }
 
@@ -43,10 +43,10 @@ void escanearArchivoParaLogearse() {
             menuJuegos(&pDatosUsuario);
             break;
         }
-        else fread(&pDatosUsuario, sizeof(tDatosUsuario), 1, login);
+        fread(&pDatosUsuario, sizeof(tDatosUsuario), 1, login);
     }
     if (feof(login)) {
-        cerrarArchivoParaLogearse();
+        fclose(login);
         system("cls");
         printf("\t\t\t\tUsuario o contrase%ca incorrecto\n", 164);
         printf("\t\t\t\tIntentelo de nuevo:\n");
@@ -58,5 +58,4 @@ void cerrarArchivoParaLogearse() {
     actualizarPuntos(DatosRef);
     actualizarFichas(DatosRef);
 	fclose(login);
-
 }

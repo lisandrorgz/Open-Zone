@@ -37,9 +37,10 @@ void menuSwitch() {
         break;
     case 3:
         procesarMostradoPuntaje();
+        menuPrincipal();
         break; 
     case 4:
-        printf("Saliendo...");
+        printf("Saliendo...\n");
         break; 
     default:
         system("cls");

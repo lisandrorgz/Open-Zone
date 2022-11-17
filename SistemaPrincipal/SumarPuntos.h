@@ -94,12 +94,7 @@ void actualizarPuntos(tDatosUsuario*ActualizarPuntos) {
 void actualizarConexion(tDatosUsuario*ActualizarSaldo) {
     tDatosUsuario pDatosUsuario;
     tDatosUsuario usuarioLogeado;
-    pDatosUsuario.codCuenta = ActualizarSaldo->codCuenta;
-    strcpy(pDatosUsuario.nombreUsuario, ActualizarSaldo->nombreUsuario);
-    strcpy(pDatosUsuario.password, ActualizarSaldo->password);
-    pDatosUsuario.saldo = ActualizarSaldo->saldo;
-    pDatosUsuario.puntos = ActualizarSaldo->puntos;
-    strcpy(pDatosUsuario.conexion, ActualizarSaldo->conexion);
+    pDatosUsuario = *ActualizarSaldo;
     abrirArchivoPuntos();
     fread(&usuarioLogeado, sizeof(tDatosUsuario), 1, modificarPuntos);
     while (!feof(modificarPuntos)) {
