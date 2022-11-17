@@ -1,24 +1,7 @@
-/**
- * funciones para llamar en el menu 
- * abrirArchivoParaMostrar();
- * procesarCuentasUsuarios();
- * cerrarArchivoMostrar();
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef char string[100];
-
-typedef struct {
-    int codCuenta;
-    string nombreUsuario;
-    string password;
-    int puntos; //? "Puntos" "Saldo" "Score" "Fichas"
-    //? Preguntar a Lisandro
-}tUsuarios;
-
-tUsuarios mDatosUsuario;
+tDatosUsuario mDatosUsuario;
 FILE *mostrarLogin;
 
 void abrirArchivoParaMostrar();
@@ -31,7 +14,9 @@ void abrirArchivoParaMostrar(){
 	system("cls");
 	mostrarLogin = fopen("cuentasUsuario.dat", "rb");
 	printf("\t*** REGISTRO DE USUARIOS ***\n" ); 
-	printf("Cuenta | Usuario\t| Password\n"); 
+
+	printf("Cuenta | Usuario\t| Password | Puntaje\n"); 
+
 }
 
 void procesarCuentasUsuarios() {
@@ -45,11 +30,11 @@ void procesarCuentasUsuarios() {
 }
 	
 void leerDatosUsuario() {
-	fread(&mDatosUsuario, sizeof(tUsuarios), 1, mostrarLogin);
+	fread(&mDatosUsuario, sizeof(tDatosUsuario), 1, mostrarLogin);
 }
 	
 void mostrarCuentaUsuario() {
-	printf("%d\t %s\t%s\n", mDatosUsuario.codCuenta, mDatosUsuario.nombreUsuario, mDatosUsuario.password);
+	printf("%d\t %s\t%s\t%d\n", mDatosUsuario.codCuenta, mDatosUsuario.nombreUsuario, mDatosUsuario.password, mDatosUsuario.puntos);
 }
 
 void cerrarArchivoMostrar(){

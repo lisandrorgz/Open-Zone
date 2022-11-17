@@ -3,17 +3,7 @@
 #include <string.h>
 #include <windows.h>
 
-typedef char string[100];
-
-typedef struct {
-    int codCuenta;
-    string nombreUsuario;
-    string password;
-    int saldo, puntos; 
-    
-}tDatosRegistro;
-
-tDatosRegistro rDatosRegistro;
+tDatosUsuario rDatosRegistro;
 FILE *registro;
 
 void abrirArchivoParaRegistar();
@@ -47,7 +37,7 @@ void grabarRegistroAlumno() {
     printf("\t\t\t\tDesea registrarse? 1-Si 2-No: ");
     scanf("%d", &respuesta);
     if (respuesta == 1) {
-        fwrite(&rDatosRegistro, sizeof(tDatosRegistro), 1, registro);
+        fwrite(&rDatosRegistro, sizeof(tDatosUsuario), 1, registro);
         printf("\t\t\t\tRegistrado Correctamente...\n");
         system("pause");
         system("cls");
@@ -66,9 +56,9 @@ void cerrarArchivoRegistro() {
 }
 
 void verCuentaSiNoEstaRegistrada() {
-    tDatosRegistro prueba;
+    tDatosUsuario prueba;
     int respuesta;
-    fread(&prueba, sizeof(tDatosRegistro), 1, registro);
+    fread(&prueba, sizeof(tDatosUsuario), 1, registro);
     while (!feof(registro)) {
         rDatosRegistro.codCuenta = prueba.codCuenta+1;
         if (!strcmp(prueba.nombreUsuario, rDatosRegistro.nombreUsuario)) {
@@ -82,6 +72,6 @@ void verCuentaSiNoEstaRegistrada() {
                 scanf("%s", &rDatosRegistro.password);
             }
         }
-        fread(&prueba, sizeof(tDatosRegistro), 1, registro);
+        fread(&prueba, sizeof(tDatosUsuario), 1, registro);
     }
 }

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "menuJuegos.h"
+#include "SumarPuntos.h"
 
 
 
@@ -55,6 +56,8 @@ void escanearArchivoParaLogearse() {
 }
 
 void cerrarArchivoParaLogearse() {
+    actualizarPuntos(DatosRef);
+    actualizarFichas(DatosRef);
 	fclose(login);
 
 }
