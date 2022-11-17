@@ -15,7 +15,7 @@ void abrirArchivoParaMostrar(){
 	mostrarLogin = fopen("cuentasUsuario.dat", "rb");
 	printf("\t*** REGISTRO DE USUARIOS ***\n" ); 
 
-	printf("Cuenta | Usuario\t| Password | Puntaje\n"); 
+	printf("Cuenta | Usuario\t| Password | Fichas | Puntaje | Conexion\n"); 
 
 }
 
@@ -34,7 +34,7 @@ void leerDatosUsuario() {
 }
 	
 void mostrarCuentaUsuario() {
-	printf("%d\t %s\t%s\t%d\n", mDatosUsuario.codCuenta, mDatosUsuario.nombreUsuario, mDatosUsuario.password, mDatosUsuario.puntos);
+	printf("%d\t %s\t%s\t%d\t%d\t%s\n", mDatosUsuario.codCuenta, mDatosUsuario.nombreUsuario, mDatosUsuario.password, mDatosUsuario.saldo, mDatosUsuario.puntos, mDatosUsuario.conexion);
 }
 
 void cerrarArchivoMostrar(){

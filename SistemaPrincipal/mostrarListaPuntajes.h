@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 typedef struct nodo {
     tDatosUsuario datos;
     struct nodo *izquierdo;
@@ -9,7 +8,7 @@ typedef struct nodo {
 }tArbolPuntaje;
 
 tArbolPuntaje *datosArbol;
-lDatosUsuario datosPuntaje;
+tDatosUsuario datosPuntaje;
 FILE *listaPuntaje;
 
 void abrirArchivoPuntaje();

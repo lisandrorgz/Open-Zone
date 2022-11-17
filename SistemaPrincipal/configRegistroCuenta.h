@@ -26,7 +26,8 @@ void ingresarDatosRegistro() {
     printf("\t\t\t\tElija una contrase%ca para la cuenta: ", 164);
     scanf("%s", &rDatosRegistro.password);
     rDatosRegistro.puntos = 0;
-    rDatosRegistro.saldo = 1; //* Aca van cuantos puntos va a tener despues de registrarse cambiar *//
+    rDatosRegistro.saldo = 0;
+    strcpy(rDatosRegistro.conexion, "Hoy");
     verCuentaSiNoEstaRegistrada();
     grabarRegistroAlumno();
     cerrarArchivoRegistro();
@@ -56,22 +57,17 @@ void cerrarArchivoRegistro() {
 }
 
 void verCuentaSiNoEstaRegistrada() {
-    tDatosUsuario prueba;
+    tDatosUsuario aux;
     int respuesta;
-    fread(&prueba, sizeof(tDatosUsuario), 1, registro);
+    fread(&aux, sizeof(tDatosUsuario), 1, registro);
     while (!feof(registro)) {
-        rDatosRegistro.codCuenta = prueba.codCuenta+1;
-        if (!strcmp(prueba.nombreUsuario, rDatosRegistro.nombreUsuario)) {
-            printf("Usuario ya registrado...\n");
-            printf("Nombre de usuario ya existe. Elija otro por favor:\n");
-            scanf("%s", &rDatosRegistro.nombreUsuario);
-            printf("Desea cambiar la contrase%ca? -> %s (1-Si) - (0-No):", 164, rDatosRegistro.password);
-            scanf("%d", &respuesta);
-            if (respuesta == 1) {
-                printf("Ingrese la nueva contrase%ca:\n", 164);
-                scanf("%s", &rDatosRegistro.password);
-            }
+        rDatosRegistro.codCuenta = aux.codCuenta+1;
+        if (!strcmp(aux.nombreUsuario, rDatosRegistro.nombreUsuario)) {
+            printf("\t\t\t\tUsuario ya registrado...\n");
+            printf("\t\t\t\tVuelva a intentarlo...\n");
+            cerrarArchivoRegistro();
+            ingresarDatosRegistro();
         }
-        fread(&prueba, sizeof(tDatosUsuario), 1, registro);
+        fread(&aux, sizeof(tDatosUsuario), 1, registro);
     }
 }

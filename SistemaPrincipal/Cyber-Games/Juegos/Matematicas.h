@@ -61,7 +61,8 @@ void l1(tDatosUsuario*Usermath)
                 else volverAlMenu();
                 } 
                 printf("Te quedan %d fichas!!\n", Usermath->saldo);
-                    
+                system("pause");
+                system("cls"); 
             }  
             
         
@@ -83,6 +84,8 @@ void l1(tDatosUsuario*Usermath)
                 if (saldoen0(Usermath->saldo)) break;
                 else volverAlMenu();
             } printf("Te quedan %d fichas!!\n", Usermath->saldo);
+            system("pause");
+            system("cls");
         }
         else if(z==3)
         {
@@ -101,7 +104,10 @@ void l1(tDatosUsuario*Usermath)
                 printf("Respuesta incorrecta\nLa respuesta correcta es %d\n", c);
                 if (saldoen0(Usermath->saldo)) break;
                 else volverAlMenu();
-            } printf("Te quedan %d fichas!!\n", Usermath->saldo);
+            } 
+            printf("Te quedan %d fichas!!\n", Usermath->saldo);
+            system("pause");
+            system("cls");
         }
         else if(z==4)
         {
@@ -127,6 +133,8 @@ void l1(tDatosUsuario*Usermath)
                 else volverAlMenu();
             }
             printf("Te quedan %d fichas!!\n", Usermath->saldo);
+            system("pause");
+            system("cls");
         }
     }
 }

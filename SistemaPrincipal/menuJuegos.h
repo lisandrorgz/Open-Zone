@@ -2,6 +2,7 @@
 #include "Cyber-Games/Juegos/Ahorcado.h"
 #include "Cyber-Games/Juegos/BlackJack.h"
 #include "Cyber-Games/Juegos/Matematicas.h"
+#include "configMostrarCuenta.h"
 
 bool flag = true;
 bool ganarFichas();
@@ -12,8 +13,9 @@ void menuJuegos(tDatosUsuario*Userlogeado) {
     int respuesta;
     do {
     printf("\t\t---------------------------------------------------------------------\n");
+    printf("\t\t\t\t\t-*- Ultima Conexion %s -*-\n", Userlogeado->conexion);
     printf("\t\t\t\t\t\t-*- Juegos -*-\n");
-    printf("\t\t\t\t\t<---\t%s Tienes %d fichas\t--->\n", Userlogeado->nombreUsuario,Userlogeado->saldo);
+    printf("\t\t\t\t\t<--- %s Tienes %d fichas --->\n", Userlogeado->nombreUsuario,Userlogeado->saldo);
     printf("\t\t---------------------------------------------------------------------\n");
     imprimirTitulos();
     if (!strcmp(Userlogeado->nombreUsuario, "admin")) {
@@ -32,15 +34,15 @@ void menuJuegos(tDatosUsuario*Userlogeado) {
      } while (Userlogeado->saldo > 0 && flag );
 }
 
-void menuSwitchJuegos(int pEleccion, tDatosUsuario * Userlogeado) {
+void menuSwitchJuegos(int pEleccion, tDatosUsuario *Userlogeado) {
     switch (pEleccion) {
         
     case 1: mainmath(Userlogeado);break;
     case 2: menublackjack(Userlogeado); break;
     case 3: menuahorcado(Userlogeado);break;
     case 4: ganarSaldo(Userlogeado);break;
-    case 5: printf("Saliendo..."); flag=false;
-    case 6: system("pause"); system("cls"); break;
+    case 5: printf("Saliendo..."); system("pause"); system("cls"); flag=false; break;
+    case 6: procesarCuentasUsuarios(); system("pause"); system("cls"); break;
     default:
         system("cls");
         printf("\t\t\t\t\t\033[0;31m[X]Error opcion incorrecta[X]\033[0m\n");

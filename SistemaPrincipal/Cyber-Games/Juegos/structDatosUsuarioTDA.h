@@ -5,5 +5,5 @@ typedef struct {
     string nombreUsuario;
     string password;
     int saldo,puntos; 
-
+    string conexion;
 }tDatosUsuario;

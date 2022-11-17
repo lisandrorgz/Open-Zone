@@ -4,8 +4,6 @@
 #include "menuJuegos.h"
 #include "SumarPuntos.h"
 
-
-
 tDatosUsuario *DatosRef;
 tDatosUsuario pDatosUsuario;
 tDatosUsuario user;
@@ -37,11 +35,12 @@ void escanearArchivoParaLogearse() {
     fread(&pDatosUsuario, sizeof(tDatosUsuario), 1, login);
     while (!feof(login)) {
         if (!strcmp(pDatosUsuario.nombreUsuario, user.nombreUsuario) && !strcmp(pDatosUsuario.password, user.password)) {
+            actualizarConexion(&pDatosUsuario);
             DatosRef=&pDatosUsuario;
             printf("\t\t\t\tLogeado Correctamente!\n");
             system("pause");
             system("cls");
-            menuJuegos(DatosRef);
+            menuJuegos(&pDatosUsuario);
             break;
         }
         else fread(&pDatosUsuario, sizeof(tDatosUsuario), 1, login);

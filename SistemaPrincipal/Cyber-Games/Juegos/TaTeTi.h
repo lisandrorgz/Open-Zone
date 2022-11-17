@@ -72,7 +72,7 @@ void programaTateti(tDatosUsuario * Usertateti){
             printf("\t\t\t==>\aGame Over | Empate!");
             reiniciarJuego();
         } 
-    if(!(saldoen0(usuario->saldo))) printf("Seguir jugando? 1/0: "); scanf("%d", &ingreso);
+    if(!(saldoen0(usuario->saldo))) printf("Seguir jugando? 1/0: "); scanf("%d", &ingreso); system("cls");
   } while(ingreso && (usuario->saldo)!=0);
 }
 
