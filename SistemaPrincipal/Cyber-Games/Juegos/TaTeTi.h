@@ -35,7 +35,6 @@ int ingreso;
 void programaTateti(tDatosUsuario * Usertateti){
     
     usuario = Usertateti;
-    //? strcpy(nombrePlayer[1], "Nombre del Usuario Aca del Login (Mauri)");
     strcpy(nombrePlayer[2], "Bot - Administrador");
     system("cls");
     do{
@@ -57,23 +56,25 @@ void programaTateti(tDatosUsuario * Usertateti){
         mostrarTateti();
         if (verSiGanoAlguien == 1) {
             if (player == 1) {
-                printf("\033[0;33mGanaste 1 Ficha y 2 Puntos!!\033[0m\n");
+                printf("\n\t\t\t\t\t  \033[1;32mGanaste 1 Ficha y 2 Puntos!!\033[0m\n");
                 sleep(2);
                 usuario->saldo+=1;
                 usuario->puntos+=2;
             }
             else {
-                printf("Gano %s.\n", nombrePlayer[player]);
+                printf("\t\t\t\t\tGano %s.\n", nombrePlayer[player]);
                 usuario->saldo-=1;
             }
             reiniciarJuego();
         }
         if (verSiGanoAlguien == 0){
-            printf("\t\t\t==>\aGame Over | Empate!");
+            printf("\t\t\t\t\t\t==>\aGame Over | Empate!");
             reiniciarJuego();
         } 
-    if(!(saldoen0(usuario->saldo))) printf("Seguir jugando? 1/0: "); scanf("%d", &ingreso); system("cls");
+    if(!(saldoen0(usuario->saldo))) printf("\n\t\t\t\t\t    Seguir jugando? (1/0): "); scanf("%d", &ingreso); system("cls");
   } while(ingreso && (usuario->saldo)!=0);
+  system("cls");
+  printf("\n\t\t\t\t\tSaliendo del juego...");
 }
 
 char enteroACaracter(int numero){
@@ -91,18 +92,18 @@ void reiniciarJuego(){
 }
 
 void pedirDatosPlayer(){
-    printf("\t\t\t%s, ingrese un numero: ", usuario->nombreUsuario);
+    printf("\n\t\t\t\t\t%s, ingrese un numero: ", usuario->nombreUsuario);
 	scanf("%d", &numElegidoPlayer);
 }
 
 void datosBotAdmin(int pNumElegido){
     srand(time(NULL));
     numElegidoBot = 1 + rand() % 9;
-    printf("\t\t\t%s: Me Toca a mi!\n", nombrePlayer[2]);
+    printf("\t\t\t\t\t%s: Me Toca a mi!\n", nombrePlayer[2]);
     sleep(1);
-    printf("\t\t\t%s: Dejame pensar bien...\n", nombrePlayer[2]);
+    printf("\t\t\t\t\t%s: Dejame pensar bien...\n", nombrePlayer[2]);
     sleep(1);
-    printf("\t\t\t%s: Listo! Tu turno...\n", nombrePlayer[2]);
+    printf("\t\t\t\t\t%s: Listo! Tu turno...\n", nombrePlayer[2]);
     sleep(1);
 }
 
@@ -117,8 +118,8 @@ void ponerXoOUsuario(int numElegido){
 	else if (numElegido == 8 && solucion[8] == '8') solucion[8] = marcar;
 	else if (numElegido == 9 && solucion[9] == '9') solucion[9] = marcar;
 	else{
-	    printf("\t\t\t\t\033[0;31m[!]Error[!]\033[0m\n");
-        printf("\t\t\t%s, ingrese otro numero: ", usuario->nombreUsuario[1]);
+	    printf("\t\t\t\t\t\t\033[0;31m[!]Error[!]\033[0m\n");
+        printf("\t\t\t\t\t%s, ingrese otro numero: ", usuario->nombreUsuario[1]);
 	    scanf("%d", &numElegidoPlayer);
         ponerXoOUsuario(numElegidoPlayer);
 	}
@@ -155,15 +156,15 @@ int checarSiGano(){
 
 void mostrarTateti(){
     system("cls");
-    printf("\n\n\t\t\t\t  -*- Tateti -*-\n\n");
-    printf("\t\t\t  %s (X)  vs  %s (O)\n\n\n", usuario->nombreUsuario, nombrePlayer[2]);
-    printf("\t\t\t\t     |     |     \n");
-    printf("\t\t\t\t  %c  |  %c  |  %c \n", solucion[1], solucion[2], solucion[3]);
-    printf("\t\t\t\t_____|_____|_____\n");
-    printf("\t\t\t\t     |     |     \n");
-    printf("\t\t\t\t  %c  |  %c  |  %c \n", solucion[4], solucion[5], solucion[6]);
-    printf("\t\t\t\t_____|_____|_____\n");
-    printf("\t\t\t\t     |     |     \n");
-    printf("\t\t\t\t  %c  |  %c  |  %c \n", solucion[7], solucion[8], solucion[9]);
-    printf("\t\t\t\t     |     |     \n\n");
+    printf("\n\n\t\t\t\t\t\t -*- TATETI -*-\n\n");
+    printf("\t\t\t\t\t%s (X)  vs  %s (O)\n\n\n", usuario->nombreUsuario, nombrePlayer[2]);
+    printf("\t\t\t\t\t             |     |     \n");
+    printf("\t\t\t\t\t          %c  |  %c  |  %c \n", solucion[1], solucion[2], solucion[3]);
+    printf("\t\t\t\t\t        _____|_____|_____\n");
+    printf("\t\t\t\t\t             |     |     \n");
+    printf("\t\t\t\t\t          %c  |  %c  |  %c \n", solucion[4], solucion[5], solucion[6]);
+    printf("\t\t\t\t\t        _____|_____|_____\n");
+    printf("\t\t\t\t\t             |     |     \n");
+    printf("\t\t\t\t\t          %c  |  %c  |  %c \n", solucion[7], solucion[8], solucion[9]);
+    printf("\t\t\t\t\t             |     |     \n\n");
 }

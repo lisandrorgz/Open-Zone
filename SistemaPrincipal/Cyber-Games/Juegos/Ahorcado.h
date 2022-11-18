@@ -2,105 +2,130 @@
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>
+#define CANT_PALABRAS 11
 
+typedef char str50[50];
+str50 a; 
+str50 palabras[CANT_PALABRAS] = {{"cabeza"},{"computadora"},{"espacio"},{"clavo"},{"celular"},{"tetera"},{"coliflor"},{"televisor"},{"competencia"},{"lodo"},{"titanio"}};
+char d='_',alpha,ant[11],b[11];
+int ingreso,palabraAzar,i,j,c,count,ans,flag1,flag2,*ptr;
 
-
-void menuahorcado(tDatosUsuario*);
-
-
+void menuahorcado(tDatosUsuario*),seguirJugando(), iniciar();
 void menuahorcado(tDatosUsuario*Userahorcado) {
-
-int i,j,c,count=0,ans=0,flag=0,*ptr;
-char a[1][10]={"dogodo"};
-char b[10],alpha;
-char d='_';
-c=strlen(&a[0][0]);
-//printf("\n\t\t**************\n\n\t\t\t");
-printf("\n\n\t\t\t ** AHORCADO** \n");
-	printf("\n\t\t\t**************\t\t\t");
-		printf("\n\t\t\t..............\n\n\t\t\t  ");
+do {
+	iniciar();
+	printf("\n\n\t\t\t\t\t\t ** AHORCADO **\n");
+	printf("\n\t\t\t\t\t\t**************\t\t\t");
+	printf("\n\t\t\t\t\t\t..............\n\n\t\t\t\t\t\t");
 for(j=0;j<c;j++)
 	  { printf("%c ",d);
 	  b[j]=d;}
-	  //printf("\n\n\t\t*****************");
-	  printf("\n\n\t\t\t..............\t\t\t");
-		printf("\n\n\t\t\t**************");
-// for(j=0;j<c;j++) printf("\n %c",b[j]); //{	   ptr=&b[j];
-	 //  printf("\n %c",*ptr); }
+	  printf("\n\n\t\t\t\t\t\t..............\t\t\t");
+		printf("\n\n\t\t\t\t\t\t**************");
 
-while (count<6)//||(ans<c))
+
+while (count<c)
  {
-
- flag=0;
-	   printf("\n\n\n\n\n\n\t Ingresa un caracter");
+ flag1=0;
+ flag2=1;
+	while(flag2){
+	   printf("\n\n\n\n\t\t\t\tIngresa un caracter: ");
 		alpha=getche();
-	  //	printf("%c",alpha);
-		for(i=0;i<c;i++)
-		{
-			if (alpha==a[0][i])
-		   {	b[i]=a[0][i];
-		   flag=1;
-			ans++; }
-			//else if(b[i]!=d) b[i]=a[0][i];
-			//else b[i]=d;
-		   //	printf("\n u r correct");  }
-		   //	if(ans==c) goto man; }
-			//printf("\n ans=%d",ans);}
+		for(i=0;i<c;i++){
+			if(alpha == ant[i]){
+				printf("\n\n\t\tEl caracter %c ya no se puede volver a repetir! vuelva a ingresar otro caracter", ant[i]);}
+				 
+			else {
+				flag2=0;
+				if (alpha==a[i]){
+					b[i]=a[i];
+					ant[i]=a[i]; 
+					flag1=1;
+					ans++;
+					break; }
+			}	
+			
+				
+		} 
+		
+	}
 
-			//printf("\n count=%d",count);
+		
 
-		}
-
-		printf("\n\n\t\t\t ** Ahorcado ** \n");
-		printf("\n\t\t\t**************\t\t\t");
-		printf("\n\t\t\t..............\n\n\t\t\t  ");
+		printf("\n\n\t\t\t\t\t\t ** AHORCADO **\n");
+		printf("\n\t\t\t\t\t\t**************\t\t\t");
+		printf("\n\t\t\t\t\t\t..............\n\n\t\t\t\t\t\t");
+		fflush(stdin);
 		for(i=0;i<c;i++)
 		printf("%c ",b[i]);
-		printf("\n\n\t\t\t..............\t\t\t");
-		printf("\n\n\t\t\t**************");
+		printf("\n\n\t\t\t\t\t\t..............\t\t\t");
+		printf("\n\n\t\t\t\t\t\t**************");
 
-		if(flag==0)
-		{count++;
-		printf("\n\n\n\n\t\t%c Es una entrada incorrecta",alpha);
-		printf("\n\n\t\t (Tienes %d intentos mas)",6-count);}
+		if(flag1==0)
+		{
+		count++;
+		printf("\n\n\t\t\t\t\t  %c es una entrada incorrecta",alpha);
+		printf("\n\t\t\t\t\t  Tienes %d intentos mas",c-count);}
 
-		else{
-		printf("\n\n\t\t Correcto!!");
-	   printf("\n\t\t( Tienes %d caracteres por ingresar)",c-ans);}
-	   //	printf("\n ans=%d",ans);
-	   //	printf("\n count=%d",count);
+		else {
+			
+		printf("\n\n\t\t\t\t\t\tAcertaste! Wow...");
+	   printf("\n\t\t\t\t\tQuedan %d caracteres por adivinar!",c-ans);}
 		if(ans==c) break;
  }
- if(ans==c) {printf("\n\n\n\t Ganaste!\n");
-			 printf("+3 Puntos\n");
-			 Userahorcado->puntos+=3;}
+ if(ans==c) {
+	system("cls");
+	printf("\n\n\n\t\t\t\t\t\t\tGanaste!");
+	printf("\n\n\t\t\t\t\t\t\t\033[1;32m+3 Puntos\n\033[0m");
+	Userahorcado->puntos+=3;
+	sleep(3);
+	seguirJugando();
+	sleep(2);
+	
+	}
 	 
 	 
  else {
-		printf("\n\n\n\t\t Perdiste\n\n \t\t **Estas ahorcado**");
+		system("cls");
+		printf("\n\t\t\t\t\t\t\t Perdiste!\n\t\t\t\t\t\t     **Estas ahorcado**\t");
+		printf("\n\n\t\t\t\t\t\t        \033[1;31m-1 Ficha\n\033[0m");
+		sleep(2);
+		
 		Userahorcado->saldo-=1;
 		if (Userahorcado->saldo == 0) {
 			sleep(1);
-			printf("\n\t\t No hay mas saldo!\n");
-			sleep(1);
-			printf("\n\t\t Volviendo al menu...");}
-			
-
-
-	  /*	if(output[i]!='_')
-		output[i]=a[0][i];
-		elseif(b[j]==a[0][i])
-		output[i]==a[0][i];
-		else
-		output[i]='_';
+			printf("\n\t\t\t\t\tNo te quedan mas fichas!\n");
+			printf("\n\t\t\t\t\tSaliendo del juego...\n");
+			sleep(2);		
+		 }else seguirJugando();
 		}
-		for(i=0;i<c;i++)
-		printf("%c",output[i])
-
- }      */
-
-
-	}
+		
+	} while (ingreso);
+	system("cls");
+	printf("\n\t\t\t\t\t\tSaliendo del juego...\n");
+	sleep(2);
 }
 
+void seguirJugando() {
+	printf("\n\n\n\t\t\t\t\t\t  Seguir jugando? (1/0): "); fflush(stdin); scanf("%d", &ingreso);
+}
 
+void iniciar() {
+	system("cls");
+		limpiarArreglos();
+		srand(time(NULL));
+		palabraAzar = 0 + rand() % 10;
+		count=0;ans=0;flag1=0;
+		strcpy(a, palabras[palabraAzar]);
+		c=strlen(a);
+		printf("PRUEBA | Palabra que tomo: %s", a);
+		
+		
+}
+void limpiarArreglos() {
+	for (i=0; i<CANT_PALABRAS; i++) {
+		a[i] = NULL;
+		ant[i] = NULL;
+		b[i] = NULL;
+	}
+}
