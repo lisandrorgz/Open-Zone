@@ -43,6 +43,12 @@ void menuSwitchJuegos(int pEleccion, tDatosUsuario *Userlogeado) {
     case 6: if (!strcmp(Userlogeado->nombreUsuario, "admin")) {
                 procesarCuentasUsuarios(); system("pause"); system("cls"); break;
             }
+            else {
+                system("cls");
+                printf("\t\t\t\t\t\033[0;31m[X]Error opcion incorrecta[X]\033[0m\n");
+                menuJuegos(Userlogeado);
+                break;
+            }
     default:
         system("cls");
         printf("\t\t\t\t\t\033[0;31m[X]Error opcion incorrecta[X]\033[0m\n");
