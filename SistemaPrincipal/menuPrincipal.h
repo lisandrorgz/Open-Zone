@@ -9,7 +9,8 @@ void menuPrincipal();
 void menuSwitch();
 int opcion;
 
-void menuPrincipal() {
+void menuPrincipal()
+{
     printf("\t\t---------------------------------------------------------------------\n");
     printf("\t\t\t\t-*- Iniciar Sesion | Registrarse -*-\n");
     printf("\t\t---------------------------------------------------------------------\n");
@@ -22,8 +23,10 @@ void menuPrincipal() {
     menuSwitch();
 }
 
-void menuSwitch() {
-    switch (opcion) {
+void menuSwitch()
+{
+    switch (opcion)
+    {
     case 1:
         system("cls");
         printf("\t\t\t\t\tIngrese:\n");
@@ -32,16 +35,16 @@ void menuSwitch() {
         break;
     case 2:
         system("cls");
-	    ingresarDatosRegistro();
+        ingresarDatosRegistro();
         menuPrincipal();
         break;
     case 3:
         procesarMostradoPuntaje();
         menuPrincipal();
-        break; 
+        break;
     case 4:
         printf("Saliendo...\n");
-        break; 
+        break;
     default:
         system("cls");
         printf("\t\t\t\t\t\033[0;31m[X]Error opcion incorrecta[X]\033[0m\n");

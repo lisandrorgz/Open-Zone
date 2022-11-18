@@ -10,33 +10,38 @@ void leerDatosUsuario();
 void mostrarCuentaUsuario();
 void cerrarArchivoMostrar();
 
-void abrirArchivoParaMostrar(){
+void abrirArchivoParaMostrar()
+{
 	system("cls");
 	mostrarLogin = fopen("cuentasUsuario.dat", "rb");
-	printf("\t*** REGISTRO DE USUARIOS ***\n" ); 
+	printf("\t*** REGISTRO DE USUARIOS ***\n");
 
-	printf("Cuenta | Usuario\t| Password | Fichas | Puntaje | Conexion\n"); 
-
+	printf("Cuenta | Usuario\t| Password | Fichas | Puntaje | Conexion\n");
 }
 
-void procesarCuentasUsuarios() {
+void procesarCuentasUsuarios()
+{
 	abrirArchivoParaMostrar();
 	leerDatosUsuario();
-	while(!feof(mostrarLogin)) {
+	while (!feof(mostrarLogin))
+	{
 		mostrarCuentaUsuario();
 		leerDatosUsuario();
 	}
 	cerrarArchivoMostrar();
 }
-	
-void leerDatosUsuario() {
+
+void leerDatosUsuario()
+{
 	fread(&mDatosUsuario, sizeof(tDatosUsuario), 1, mostrarLogin);
 }
-	
-void mostrarCuentaUsuario() {
+
+void mostrarCuentaUsuario()
+{
 	printf("%d\t %s\t%s\t%d\t%d\t%s\n", mDatosUsuario.codCuenta, mDatosUsuario.nombreUsuario, mDatosUsuario.password, mDatosUsuario.saldo, mDatosUsuario.puntos, mDatosUsuario.conexion);
 }
 
-void cerrarArchivoMostrar(){
+void cerrarArchivoMostrar()
+{
 	fclose(mostrarLogin);
 }

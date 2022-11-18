@@ -1,10 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <windows.h>
 #include <stdbool.h>
 #include <time.h>
+#include <string.h>
 
 void menublackjack(tDatosUsuario *);
-
+int Summ(int, int);
+int Check14(int);
+int CheckAce(int);
+void showCards(int *, int);
 
 void menublackjack(tDatosUsuario *Userblackjack)
 {
@@ -278,16 +283,20 @@ Intro:;
 		if (D_14)
 		{
 
-			if (saldoen0(Userblackjack->saldo) && bust) {
+			if (saldoen0(Userblackjack->saldo) && bust)
+			{
 				printf("\n\t\t\t\t\tNo te quedan mas fichas\n");
-				goto salir; }
+				goto salir;
+			}
 			else
 			{
-				if (N_14) {
+				if (N_14)
+				{
 					printf("\n\n\t\t\t\tBot Administrador: Soy el ganador!!.\n\n");
 					printf("\n\n\t\t\t\t\t\t  \033[1;31m-1 Ficha\n\033[0m");
-					Userblackjack->saldo-=1; 
-					goto end; }
+					Userblackjack->saldo -= 1;
+					goto end;
+				}
 				else if (sumN < 31)
 					printf("\n\n\t\t\t\tBot Administrador: Tienes la suma de (%d).. Ganaste!!.\n\n", sumN);
 				else if (sumN == 31)
@@ -307,14 +316,14 @@ Intro:;
 					Userblackjack->saldo -= 1;
 					goto end;
 				}
-				if (sumN > sumD) {
+				if (sumN > sumD)
+				{
 					printf("\t\t\t\tBot Administrador: Bien jugado!\n\n");
 					sleep(1);
 					printf("\t\t\t\t\t\t+4 Puntos\n");
 					sleep(1);
 					Userblackjack->puntos += 4;
 					goto end;
-
 				}
 			}
 		}
@@ -382,25 +391,29 @@ Intro:;
 			sleep(2);
 
 			D_14 = Check14(sumD);
-			if (saldoen0(Userblackjack->saldo) && bust) {
+			if (saldoen0(Userblackjack->saldo) && bust)
+			{
 				printf("\n\t\t\t\t\tNo te quedan mas fichas\n");
-				goto salir; }
+				goto salir;
+			}
 			else
 			{
 				if (D_14)
 				{
 
-					if (N_14) {
+					if (N_14)
+					{
 						printf("\n\n\t\t\t\t\tBot Administrador: Soy el ganador!!.\n\n");
-						Userblackjack->saldo -= 1; 
-						goto end; }
-						
+						Userblackjack->saldo -= 1;
+						goto end;
+					}
 
-					else if (sumN < 31) {
+					else if (sumN < 31)
+					{
 						printf("\n\n\t\t\t\t\tBot Administrador: Soy el ganador!!.\n\n");
-						Userblackjack->saldo -= 1; 
-						goto end; }
-						
+						Userblackjack->saldo -= 1;
+						goto end;
+					}
 
 					else if (sumN == 31)
 					{
@@ -410,17 +423,15 @@ Intro:;
 						sleep(1);
 						Userblackjack->puntos += 4;
 						goto end;
-						
 					}
 
-					else if (bust) {
+					else if (bust)
+					{
 						printf("\n\t\t\t\t\tBot Administrador: Volaste! Yo gane!\n");
 						printf("\n\n\t\t\t\t\t\t  \033[1;31m-1 Ficha\n\033[0m");
-						goto end; }
-						
+						goto end;
+					}
 				}
-
-				
 			}
 
 			if (N_14 && sumD < 31)
@@ -430,18 +441,21 @@ Intro:;
 		// we have a winner
 		printf("\n\t\t\t\tBot Administrador: Suma de mis cartas: %d\n\t\t\t\tBot Administrador: Suma de tus cartas: %d", sumD, sumN);
 		sleep(1);
-		if (saldoen0(Userblackjack->saldo) && bust) {
+		if (saldoen0(Userblackjack->saldo) && bust)
+		{
 			printf("\n\t\t\t\t\tNo te quedan mas fichas\n");
-			goto salir; }
+			goto salir;
+		}
 
 		if ((sumD >= sumN && sumD <= 31) || bust)
 		{
 			printf("\n\t\t\t\tBot Administrador: Yo gane!\n");
 			printf("\n\n\t\t\t\t\t\t  \033[1;31m-1 Ficha\n\033[0m");
-			
-			Userblackjack->saldo -= 1; 
+
+			Userblackjack->saldo -= 1;
 		}
-		else {
+		else
+		{
 			printf("\n\t\t\t\tBot Administrador: Vole!, ganaste... es una lastima.\n");
 			sleep(1);
 			printf("\n\n\t\t\t\t\t\t  \033[1;32m+4 Puntos\n\033[0m");
@@ -463,36 +477,38 @@ Intro:;
 			goto salir;
 		}
 	}
-	salir: ;
+salir:;
 	system("cls");
 	printf("\n\t\t\t\t\t\tSaliendo del juego...\n");
 	sleep(2);
 }
 
-
 // eimon96 11/2020 <<3
 int Summ(int draw, int sum)
 {
-	if (draw == 11 || draw == 12 || draw == 13) sum += 10;
-	else sum += draw;
-	
+	if (draw == 11 || draw == 12 || draw == 13)
+		sum += 10;
+	else
+		sum += draw;
+
 	return (sum);
 }
 
-
 int Check14(int s)
-{	
-	if (s == 14) 	return (1);
-	else 			return (0);
+{
+	if (s == 14)
+		return (1);
+	else
+		return (0);
 }
-
 
 int CheckAce(int draw)
 {
-	if (draw == 1) 	return (1);
-	else			return (0);
+	if (draw == 1)
+		return (1);
+	else
+		return (0);
 }
-
 
 void showCards(int *array_cards, int siz)
 {

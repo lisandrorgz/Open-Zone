@@ -17,11 +17,13 @@ void buscarUsuarioYPassword();
 void cerrarArchivoParaLogearse();
 void menu();
 
-void abrirArchivoParaLogearse() {
-	login = fopen("cuentasUsuario.dat", "rb");
+void abrirArchivoParaLogearse()
+{
+    login = fopen("cuentasUsuario.dat", "rb");
 }
 
-void pedirDatosUsuarioPassword() {
+void pedirDatosUsuarioPassword()
+{
     abrirArchivoParaLogearse();
     printf("\t\t\t\tUsuario: ");
     scanf("%s", &user.nombreUsuario);
@@ -31,12 +33,15 @@ void pedirDatosUsuarioPassword() {
     cerrarArchivoParaLogearse();
 }
 
-void escanearArchivoParaLogearse() {
+void escanearArchivoParaLogearse()
+{
     fread(&pDatosUsuario, sizeof(tDatosUsuario), 1, login);
-    while (!feof(login)) {
-        if (!strcmp(pDatosUsuario.nombreUsuario, user.nombreUsuario) && !strcmp(pDatosUsuario.password, user.password)) {
+    while (!feof(login))
+    {
+        if (!strcmp(pDatosUsuario.nombreUsuario, user.nombreUsuario) && !strcmp(pDatosUsuario.password, user.password))
+        {
             actualizarConexion(&pDatosUsuario);
-            DatosRef=&pDatosUsuario;
+            DatosRef = &pDatosUsuario;
             printf("\t\t\t\tLogeado Correctamente!\n");
             system("pause");
             system("cls");
@@ -45,7 +50,8 @@ void escanearArchivoParaLogearse() {
         }
         fread(&pDatosUsuario, sizeof(tDatosUsuario), 1, login);
     }
-    if (feof(login)) {
+    if (feof(login))
+    {
         fclose(login);
         system("cls");
         printf("\t\t\t\tUsuario o contrase%ca incorrecto\n", 164);
@@ -54,8 +60,9 @@ void escanearArchivoParaLogearse() {
     }
 }
 
-void cerrarArchivoParaLogearse() {
+void cerrarArchivoParaLogearse()
+{
     actualizarPuntos(DatosRef);
     actualizarFichas(DatosRef);
-	fclose(login);
+    fclose(login);
 }
