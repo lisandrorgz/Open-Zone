@@ -75,7 +75,7 @@ void programaTateti(tDatosUsuario *Usertateti)
             }
             reiniciarJuego();
         }
-        if (verSiGanoAlguien == 0)
+        else
         {
             printf("\t\t\t\t\t\t==>\aGame Over | Empate!");
             reiniciarJuego();
@@ -85,8 +85,9 @@ void programaTateti(tDatosUsuario *Usertateti)
         scanf("%d", &ingreso);
         system("cls");
     } while (ingreso && (usuario->saldo) != 0);
-    system("cls");
     printf("\n\t\t\t\t\tSaliendo del juego...");
+    sleep(1);
+    system("cls");
 }
 
 char enteroACaracter(int numero)
@@ -147,7 +148,7 @@ void ponerXoOUsuario(int numElegido)
     else
     {
         printf("\t\t\t\t\t\t\033[0;31m[!]Error[!]\033[0m\n");
-        printf("\t\t\t\t\t%s, ingrese otro numero: ", usuario->nombreUsuario[1]);
+        printf("\t\t\t\t\t%s, ingrese otro numero: ", usuario->nombreUsuario);
         scanf("%d", &numElegidoPlayer);
         ponerXoOUsuario(numElegidoPlayer);
     }

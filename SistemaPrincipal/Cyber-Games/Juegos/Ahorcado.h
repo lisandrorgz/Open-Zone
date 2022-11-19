@@ -111,6 +111,7 @@ void menuahorcado(tDatosUsuario *Userahorcado)
 				printf("\n\t\t\t\t\tNo te quedan mas fichas!\n");
 				printf("\n\t\t\t\t\tSaliendo del juego...\n");
 				sleep(2);
+				system("cls");
 			}
 			else
 				seguirJugando();
@@ -120,6 +121,7 @@ void menuahorcado(tDatosUsuario *Userahorcado)
 	system("cls");
 	printf("\n\t\t\t\t\t\tSaliendo del juego...\n");
 	sleep(2);
+	system("cls");
 }
 
 void seguirJugando()
@@ -140,7 +142,6 @@ void iniciar()
 	flag1 = 0;
 	strcpy(a, palabras[palabraAzar]);
 	c = strlen(a);
-	printf("PRUEBA | Palabra que tomo: %s", a);
 }
 void limpiarArreglos()
 {

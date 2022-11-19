@@ -478,9 +478,9 @@ Intro:;
 		}
 	}
 salir:;
-	system("cls");
 	printf("\n\t\t\t\t\t\tSaliendo del juego...\n");
 	sleep(2);
+	system("cls");
 }
 
 // eimon96 11/2020 <<3

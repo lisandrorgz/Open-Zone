@@ -3,6 +3,7 @@
 #include "Cyber-Games/Juegos/BlackJack.h"
 #include "Cyber-Games/Juegos/Matematicas.h"
 #include "configMostrarCuenta.h"
+#include "SumarPuntos.h"
 
 bool flag = true;
 bool ganarFichas();
@@ -18,7 +19,6 @@ void menuJuegos(tDatosUsuario *Userlogeado)
     do
     {
         printf("\t\t---------------------------------------------------------------------\n");
-        printf("\t\t\t\t-*- Ultima Conexion %s -*-\n", Userlogeado->conexion);
         printf("\t\t\t\t\t\t-*- Juegos -*-\n");
         printf("\t\t\t\t\t<--- %s Tienes %d fichas --->\n", Userlogeado->nombreUsuario, Userlogeado->saldo);
         printf("\t\t---------------------------------------------------------------------\n");
@@ -63,6 +63,9 @@ void menuSwitchJuegos(int pEleccion, tDatosUsuario *Userlogeado)
         system("pause");
         system("cls");
         flag = false;
+        printf("\t\t\t\tSi va a entrar con otra cuenta por favor reinicie el programa.\n");
+        actualizarPuntos(Userlogeado);
+        actualizarFichas(Userlogeado);
         break;
     case 6:
         if (!strcmp(Userlogeado->nombreUsuario, "admin"))

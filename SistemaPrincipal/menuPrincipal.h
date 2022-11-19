@@ -43,7 +43,7 @@ void menuSwitch()
         menuPrincipal();
         break;
     case 4:
-        printf("Saliendo...\n");
+        printf("\t\t\t\t\tSaliendo...\n");
         break;
     default:
         system("cls");

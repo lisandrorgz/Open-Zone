@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "menuJuegos.h"
-#include "SumarPuntos.h"
 
 tDatosUsuario *DatosRef;
 tDatosUsuario pDatosUsuario;
@@ -40,19 +39,20 @@ void escanearArchivoParaLogearse()
     {
         if (!strcmp(pDatosUsuario.nombreUsuario, user.nombreUsuario) && !strcmp(pDatosUsuario.password, user.password))
         {
-            actualizarConexion(&pDatosUsuario);
+            cerrarArchivoParaLogearse();
             DatosRef = &pDatosUsuario;
+            actualizarConexion(DatosRef);
             printf("\t\t\t\tLogeado Correctamente!\n");
             system("pause");
             system("cls");
-            menuJuegos(&pDatosUsuario);
+            menuJuegos(DatosRef);
             break;
         }
         fread(&pDatosUsuario, sizeof(tDatosUsuario), 1, login);
     }
     if (feof(login))
     {
-        fclose(login);
+        cerrarArchivoParaLogearse();
         system("cls");
         printf("\t\t\t\tUsuario o contrase%ca incorrecto\n", 164);
         printf("\t\t\t\tIntentelo de nuevo:\n");
@@ -62,7 +62,5 @@ void escanearArchivoParaLogearse()
 
 void cerrarArchivoParaLogearse()
 {
-    actualizarPuntos(DatosRef);
-    actualizarFichas(DatosRef);
     fclose(login);
 }
