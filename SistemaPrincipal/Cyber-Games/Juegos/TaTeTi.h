@@ -64,7 +64,7 @@ void programaTateti(tDatosUsuario *Usertateti)
             if (player == 1)
             {
                 printf("\n\t\t\t\t\t  \033[1;32mGanaste 1 Ficha y 2 Puntos!!\033[0m\n");
-                sleep(2);
+                Sleep(200);
                 usuario->saldo += 1;
                 usuario->puntos += 2;
             }
@@ -86,7 +86,7 @@ void programaTateti(tDatosUsuario *Usertateti)
         system("cls");
     } while (ingreso && (usuario->saldo) != 0);
     printf("\n\t\t\t\t\tSaliendo del juego...");
-    sleep(1);
+    Sleep(100);
     system("cls");
 }
 
@@ -118,11 +118,11 @@ void datosBotAdmin(int pNumElegido)
     srand(time(NULL));
     numElegidoBot = 1 + rand() % 9;
     printf("\t\t\t\t\t%s: Me Toca a mi!\n", nombrePlayer[2]);
-    sleep(1);
+    Sleep(100);
     printf("\t\t\t\t\t%s: Dejame pensar bien...\n", nombrePlayer[2]);
-    sleep(1);
+    Sleep(100);
     printf("\t\t\t\t\t%s: Listo! Tu turno...\n", nombrePlayer[2]);
-    sleep(1);
+    Sleep(100);
 }
 
 void ponerXoOUsuario(int numElegido)

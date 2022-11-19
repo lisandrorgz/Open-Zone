@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <string.h>
+#include <ctype.h>
 
 void menublackjack(tDatosUsuario *);
 int Summ(int, int);
@@ -16,11 +17,11 @@ void menublackjack(tDatosUsuario *Userblackjack)
 home:
 	system("cls");
 	printf("\n\n\t\t\t\t\t -*- BLACKJACK 31 -*-\n\n");
-	sleep(1);
+	Sleep(1000);
 	printf("\n\t\t\t\tBot Administrador: Juguemos al BlackJack 31!");
-	sleep(1);
+	Sleep(1000);
 	printf("\n\t\t\t\tBot Administrador: Tu contra mi!");
-	sleep(1);
+	Sleep(1000);
 	printf("\n\n\t\t\t\tPresiona 'P' para jugar");
 	printf("\n\t\t\t\tPresiona 'Q' para salir ");
 
@@ -46,10 +47,10 @@ Intro:;
 	{
 		system("cls");
 		printf("\n\n\t\t\t\tBot Administrador: Soy el repartidor! Vayamos a ello.\n");
-		sleep(2);
+		Sleep(2000);
 
 		printf("\t\t\t\tBot Administrador: Repartiendo cartas...");
-		sleep(2);
+		Sleep(2000);
 
 		srand((unsigned)time(NULL));
 		int rand1 = rand() % 13 + 1;
@@ -57,7 +58,7 @@ Intro:;
 
 		int dealer_cards[15];
 		printf("\n\t\t\t\tBot Administrador: Mi 2nda carta esta escondida.\n");
-		sleep(1);
+		Sleep(1000);
 		printf("\t\t\t\tBot Administrador: Mi primera carta:\n");
 
 		// reveal the smallest card although NOT the ace :P
@@ -71,7 +72,7 @@ Intro:;
 		dealer_cards[1] = rand2;
 
 		showCards(dealer_cards, 1);
-		sleep(1);
+		Sleep(1000);
 
 		int dealer_size = 2;
 		int sumD = 0;
@@ -86,7 +87,7 @@ Intro:;
 		noob_cards[0] = rand3;
 		noob_cards[1] = rand4;
 		printf("\n\t\t\t\tBot Administrador: Tus cartas:\n");
-		sleep(1);
+		Sleep(1000);
 		int noob_size = 2;
 		showCards(noob_cards, noob_size);
 
@@ -119,7 +120,7 @@ Intro:;
 				flagAceN = 1; // ace has changed to 11
 			}
 		}
-		sleep(1);
+		Sleep(1000);
 
 		// ACESFUNC3-DEALER
 		int flagAceDD = 0; // 0 = ace is still 1 - 1 = ace has changed to 11 --- combined with countAces
@@ -227,34 +228,34 @@ Intro:;
 					flagAceN = 0; // ace is 1 again
 				}
 			}
-			sleep(1);
+			Sleep(1000);
 
 			sumN = Summ(rr, sumN);
 
 			if (sumN > 31)
 			{
-				sleep(1);
+				Sleep(1000);
 				// system("cls");
 				printf("\n\n\t\t\t\t\t\tVolaste!\n");
 				Userblackjack->saldo -= 1;
-				sleep(2);
+				Sleep(2000);
 				bust = true;
 				break;
 			}
 			if (sumN == 31)
 			{
-				sleep(1);
+				Sleep(1000);
 				printf("\n\n\t\t\t\t\t>>>>>>>> 31 <<<<<<<\n");
-				sleep(2);
+				Sleep(2000);
 				printf("\n\t\t\t\t\t\t...\n");
-				sleep(1);
+				Sleep(1000);
 				break;
 			}
 			N_14 = Check14(sumN);
 			if (N_14)
 			{
 				printf("\n\n\t\t\t\t\t\tBot Admiistrador: Tienes 14! Tendria que ir al 31....\n\n");
-				sleep(2);
+				Sleep(2000);
 				goto deal;
 			}
 			printf("\n\t\t\t\tLas cartas suman %d\n", sumN);
@@ -272,7 +273,7 @@ Intro:;
 		// dealers turn
 		printf("\n\t\t\t\t\tBot Administrador: Mis cartas:\n");
 		showCards(dealer_cards, dealer_size);
-		sleep(1);
+		Sleep(1000);
 
 		bool D_14 = Check14(sumD);
 		if ((rand1 == rand2 && rand1 == 2) || (rand1 == 3 && rand2 == 1) || (rand1 == 1 && rand2 == 3))
@@ -302,9 +303,9 @@ Intro:;
 				else if (sumN == 31)
 				{
 					printf("\n\t\t\t\tBot Administrador: Enserio? 31? ... Okay, ganaste\n\n");
-					sleep(1);
+					Sleep(1000);
 					printf("\n\n\t\t\t\t\t\t  \033[1;32m+4 Puntos\n\033[0m");
-					sleep(1);
+					Sleep(1000);
 					Userblackjack->puntos += 4;
 					goto end;
 				}
@@ -319,9 +320,9 @@ Intro:;
 				if (sumN > sumD)
 				{
 					printf("\t\t\t\tBot Administrador: Bien jugado!\n\n");
-					sleep(1);
+					Sleep(1000);
 					printf("\t\t\t\t\t\t+4 Puntos\n");
-					sleep(1);
+					Sleep(1000);
 					Userblackjack->puntos += 4;
 					goto end;
 				}
@@ -329,7 +330,7 @@ Intro:;
 		}
 
 		printf("\n\n\t\t\t\tBot Administrador: Mis cartas suman %d\n", sumD);
-		sleep(2);
+		Sleep(2000);
 
 		if (N_14)
 			goto loopa;
@@ -344,7 +345,7 @@ Intro:;
 			dealer_cards[dealer_size - 1] = rr;
 			printf("\n\t\t\t\t\tBot Administrador: Mis cartas: ");
 			showCards(dealer_cards, dealer_size);
-			sleep(1);
+			Sleep(1000);
 
 			int newAceDD = 0;
 			// ACESFUNC4-DEALER
@@ -388,7 +389,7 @@ Intro:;
 
 			sumD = Summ(rr, sumD);
 			printf("\n\n\t\t\t\tBot Administrador: Mis cartas suman %d\n", sumD);
-			sleep(2);
+			Sleep(2000);
 
 			D_14 = Check14(sumD);
 			if (saldoen0(Userblackjack->saldo) && bust)
@@ -418,9 +419,9 @@ Intro:;
 					else if (sumN == 31)
 					{
 						printf("\n\t\t\t\t\tBot Administrador: Enserio? 31? ... Okay, ganaste\n\n");
-						sleep(1);
+						Sleep(1000);
 						printf("\n\n\t\t\t\t\t\t  \033[1;32m+4 Puntos\n\033[0m");
-						sleep(1);
+						Sleep(1000);
 						Userblackjack->puntos += 4;
 						goto end;
 					}
@@ -440,7 +441,7 @@ Intro:;
 
 		// we have a winner
 		printf("\n\t\t\t\tBot Administrador: Suma de mis cartas: %d\n\t\t\t\tBot Administrador: Suma de tus cartas: %d", sumD, sumN);
-		sleep(1);
+		Sleep(1000);
 		if (saldoen0(Userblackjack->saldo) && bust)
 		{
 			printf("\n\t\t\t\t\tNo te quedan mas fichas\n");
@@ -457,9 +458,9 @@ Intro:;
 		else
 		{
 			printf("\n\t\t\t\tBot Administrador: Vole!, ganaste... es una lastima.\n");
-			sleep(1);
+			Sleep(1000);
 			printf("\n\n\t\t\t\t\t\t  \033[1;32m+4 Puntos\n\033[0m");
-			sleep(1);
+			Sleep(1000);
 			Userblackjack->puntos += 4;
 		}
 
@@ -479,7 +480,7 @@ Intro:;
 	}
 salir:;
 	printf("\n\t\t\t\t\t\tSaliendo del juego...\n");
-	sleep(2);
+	Sleep(2000);
 	system("cls");
 }
 

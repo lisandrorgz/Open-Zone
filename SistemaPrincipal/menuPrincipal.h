@@ -45,7 +45,7 @@ void menuSwitch()
         break;
     case 4:
         printf("\t\t\t\t\tReiniciando...\n");
-        sleep(1);
+        Sleep(1000);
         system("cls");
         system("main.exe");
         break;

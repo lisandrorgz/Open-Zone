@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <string.h>
 #include <time.h>
+#include <windows.h>
 #define CANT_PALABRAS 11
 
 typedef char str50[50];
@@ -92,9 +93,9 @@ void menuahorcado(tDatosUsuario *Userahorcado)
 			printf("\n\n\n\t\t\t\t\t\t\tGanaste!");
 			printf("\n\n\t\t\t\t\t\t\t\033[1;32m+3 Puntos\n\033[0m");
 			Userahorcado->puntos += 3;
-			sleep(3);
+			Sleep(3000);
 			seguirJugando();
-			sleep(2);
+			Sleep(2000);
 		}
 
 		else
@@ -102,15 +103,15 @@ void menuahorcado(tDatosUsuario *Userahorcado)
 			system("cls");
 			printf("\n\t\t\t\t\t\t\t Perdiste!\n\t\t\t\t\t\t     **Estas ahorcado**\t");
 			printf("\n\n\t\t\t\t\t\t        \033[1;31m-1 Ficha\n\033[0m");
-			sleep(2);
+			Sleep(2000);
 
 			Userahorcado->saldo -= 1;
 			if (Userahorcado->saldo == 0)
 			{
-				sleep(1);
+				Sleep(1000);
 				printf("\n\t\t\t\t\tNo te quedan mas fichas!\n");
 				printf("\n\t\t\t\t\tSaliendo del juego...\n");
-				sleep(2);
+				Sleep(2000);
 				system("cls");
 			}
 			else
@@ -120,7 +121,7 @@ void menuahorcado(tDatosUsuario *Userahorcado)
 	} while (ingreso);
 	system("cls");
 	printf("\n\t\t\t\t\t\tSaliendo del juego...\n");
-	sleep(2);
+	Sleep(2000);
 	system("cls");
 }
 
@@ -147,8 +148,8 @@ void limpiarArreglos()
 {
 	for (i = 0; i < CANT_PALABRAS; i++)
 	{
-		a[i] = NULL;
-		ant[i] = NULL;
-		b[i] = NULL;
+		a[i] = 0;
+		ant[i] = 0;
+		b[i] = 0;
 	}
 }
