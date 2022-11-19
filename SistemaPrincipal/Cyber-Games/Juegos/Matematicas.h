@@ -602,6 +602,7 @@ void mainmath(tDatosUsuario *Usuariomath)
     int n;
     printf("Selecciona un nivel:\n");
     menumath();
+    fflush(stdin);
     scanf("%d", &n);
     switch (n)
     {
