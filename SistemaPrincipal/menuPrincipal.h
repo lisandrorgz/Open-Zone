@@ -17,7 +17,8 @@ void menuPrincipal()
     printf("\t\t\t\t\t1. Iniciar Sesion.\n");
     printf("\t\t\t\t\t2. Registrarse.\n");
     printf("\t\t\t\t\t3. Ver tabla global de jugadores\n");
-    printf("\t\t\t\t\t4. Salir.\n");
+    printf("\t\t\t\t\t4. Reiniciar programa.\n");
+    printf("\t\t\t\t\t5. Salir.\n");
     printf("\t\t\t\t\t>>> ");
     scanf("%d", &opcion);
     menuSwitch();
@@ -43,6 +44,12 @@ void menuSwitch()
         menuPrincipal();
         break;
     case 4:
+        printf("\t\t\t\t\tReiniciando...\n");
+        sleep(1);
+        system("cls");
+        system("main.exe");
+        break;
+    case 5:
         printf("\t\t\t\t\tSaliendo...\n");
         break;
     default:

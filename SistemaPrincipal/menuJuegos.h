@@ -15,6 +15,7 @@ bool compararSaldo(int);
 
 void menuJuegos(tDatosUsuario *Userlogeado)
 {
+    actualizarConexion(Userlogeado);
     int respuesta;
     do
     {
@@ -63,7 +64,7 @@ void menuSwitchJuegos(int pEleccion, tDatosUsuario *Userlogeado)
         system("pause");
         system("cls");
         flag = false;
-        printf("\t\t\t\tSi va a entrar con otra cuenta por favor reinicie el programa.\n");
+        printf("\t\t\tSi va a entrar con otra cuenta por favor reinicie el programa.\n");
         actualizarPuntos(Userlogeado);
         actualizarFichas(Userlogeado);
         break;

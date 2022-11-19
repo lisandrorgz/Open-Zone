@@ -16,7 +16,7 @@ void abrirArchivoPuntaje();
 void procesarMostradoPuntaje();
 void cerrarArchivoPuntaje();
 void insertarPuntaje(tArbolPuntaje **, tDatosUsuario);
-void ordenInverso(tArbolPuntaje *, int, int);
+void ordenInverso(tArbolPuntaje *, int);
 
 void abrirArchivoPuntaje()
 {
@@ -35,7 +35,7 @@ void procesarMostradoPuntaje()
         fread(&datosPuntaje, sizeof(tDatosUsuario), 1, listaPuntaje);
     }
     cerrarArchivoPuntaje();
-    ordenInverso(datosArbol, 1, 1);
+    ordenInverso(datosArbol, 1);
     system("pause");
     system("cls");
 }
@@ -71,17 +71,17 @@ void insertarPuntaje(tArbolPuntaje **pArbolPuntaje, tDatosUsuario pDatosUsuario)
     }
 }
 
-void ordenInverso(tArbolPuntaje *pArbolPuntaje, int titulo, int i)
+void ordenInverso(tArbolPuntaje *pArbolPuntaje, int titulo)
 {
     if (titulo == 1)
     {
         printf("\t\t\t\t\t -*- Top global puntajes -*- \n");
-        printf("\t\t\t\t\tPosicion - Usuario - Puntaje\n");
+        printf("\t\t\t\t\tUsuario - Puntaje\n");
     }
     if (pArbolPuntaje != NULL)
     {
-        ordenInverso(pArbolPuntaje->derecho, 2, i + 1);
-        printf("\t\t\t\t\t%d\t - %s -\t%d.\n", i, pArbolPuntaje->datos.nombreUsuario, pArbolPuntaje->datos.puntos);
-        ordenInverso(pArbolPuntaje->izquierdo, 2, i + 1);
+        ordenInverso(pArbolPuntaje->derecho, 2);
+        printf("\t\t\t\t\t%s - %d.\n",pArbolPuntaje->datos.nombreUsuario, pArbolPuntaje->datos.puntos);
+        ordenInverso(pArbolPuntaje->izquierdo, 2);
     }
 }

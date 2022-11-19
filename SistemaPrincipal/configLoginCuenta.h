@@ -39,9 +39,8 @@ void escanearArchivoParaLogearse()
     {
         if (!strcmp(pDatosUsuario.nombreUsuario, user.nombreUsuario) && !strcmp(pDatosUsuario.password, user.password))
         {
-            cerrarArchivoParaLogearse();
             DatosRef = &pDatosUsuario;
-            actualizarConexion(DatosRef);
+            //actualizarConexion(DatosRef);
             printf("\t\t\t\tLogeado Correctamente!\n");
             system("pause");
             system("cls");
